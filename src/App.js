@@ -1,12 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-        <h1>리액트 노드 프로젝트 테스트용</h1>
-    </div>
-  );
+export default class App extends Component {
+  getServerData = () => {
+    fetch("http://localhost:3001/", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        console.log(res);
+        console.log(typeof res);
+        return res.json();
+      })
+      .then((res) => console.log(res));
+  };
+  render() {
+    return (
+      <div>
+        <button onClick={this.getServerData}>버튼</button>
+      </div>
+    );
+  }
 }
-
-export default App;
