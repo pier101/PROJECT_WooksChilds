@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import Post from "./components/Post";
+import Sample from './components/Sample';
 
 export default class App extends Component {
   getServerData = () => {
-    fetch("http://localhost:3001/", {
+    fetch("http://localhost:5000/", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -16,7 +18,9 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.getServerData}>버튼</button>
+        {/* <button onClick={this.getServerData}>버튼</button> */}
+        <Sample/>
+        <Post/>
       </div>
     );
   }
