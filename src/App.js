@@ -1,27 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
+import AppBar1 from "./components/Appbar";
+import Artists from "./components/main/Artists";
+import Goods from "./components/main/Goods";
+import News from "./components/main/News";
 import Post from "./components/Post";
 import Sample from './components/Sample';
+const App = () => {
+ 
 
-export default class App extends Component {
-  getServerData = () => {
-    fetch("http://localhost:5000/", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => {
-        console.log(res);
-        console.log(typeof res);
-        return res.json();
-      })
-      .then((res) => console.log(res));
-  };
-  render() {
-    return (
+  return (
       <div>
-        {/* <button onClick={this.getServerData}>버튼</button> */}
-        <Sample/>
-        <Post/>
+
+          <AppBar1 />
+          <Artists />
+          <Goods />
+          <News />
+
+          
+          <Post />
       </div>
-    );
-  }
+  )
 }
+
+export default App

@@ -1,55 +1,76 @@
-import React, { useState,useEffect } from "react";
-import axios from 'axios';
-import TextareaAutosize from '@mui/material/TextareaAutosize'
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 
-const Post = () => {
-    const [content, setContent] = useState("") //const content = ""인 상태
-    const [box, setBox] = useState([]) //const content = ""인 상태
-    
-    const PostWrite = async(e) => {
-        e.preventDefault();
-    
-        const res = await axios.post('/posts',
-         {content,});
-         console.log(res)
-        if(res.data) {
-            // alert('데이터를 추가했습니다.');    
-            // return window.location.reload();
-        }
-    }
-    const 가져오기 = ()=>{
+export default function TemporaryDrawer() {
+  const [state, setState] = React.useState({
+    left: false,
+  });
 
-       // server와 통신하기 위해 useEffect 라는 훅을 사용한다.
-        axios.get('post')  
-        .then(req => setBox(req.data));
-        console.log(box)
-
-    
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
     }
 
-    const ChangePostContent = e=> {
-        setContent(e.target.value)
-    }
-    
+    setState({ ...state, [anchor]: open });
+  };
 
-
-    return (
-        <div>
-            <form method='POST' onSubmit={PostWrite}>
-                <TextareaAutosize type="text" value={content} aria-label="empty textarea" placeholder="Empty" onChange={ChangePostContent} style={{ width: 200,height: 150 , }}/>
-                {/* <input type='text' maxLength='20' placeholder='noticeContent' onChange={(e) => this.noticeContentCreate(e)}/> */}
-                <input type='submit' value='완료' />
-            </form>
-                
-                <button type='submit' onClick={가져오기}>가져오기</button>
-                { box.map((a)=>{
-                    return(
-                    <ul>{a.noticeContent}</ul>
-                    )}) }
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List sx={{mt:15}}>
+          <h5 > 가입한 서비스</h5>
+        {['가입한연애인 이름', '연애인이름2', '연이3', '연이4'].map((text, index) => (
+          <ListItem  button key={text}>
+            <ListItemIcon>
                
+               <InboxIcon />  {/* <div>연애인마크이미지</div> */}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider sx={{m:2}}/>
+      <List>
+      <h5 > 가입안한 서비스</h5>
+        {['안가연애1', '안가연애2', '안가연애3'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+               <MailIcon />  {/* <div>연애인마크이미지</div> */}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
-        </div>
-    )
+  return (
+    <div>
+      {['left'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawer(anchor, true)}>이거눌러봐</Button>
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)} //밖에눌렀을때
+          >
+            {list(anchor)}
+          </Drawer>
+        </React.Fragment>
+      ))}
+    </div>
+  );
 }
-
-export default Post
