@@ -6,9 +6,11 @@ import News from './News'
 export default function Main() {
     return (
         <div>
+
             <Artists />
             <Goods />
             <News />
+
         </div>
     )
 }

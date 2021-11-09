@@ -17,6 +17,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 
+import {Route,Link} from 'react-router-dom';  //라우터 돔
 
 export default function AppBar1() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -59,7 +60,7 @@ export default function AppBar1() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link to='/Profile'className='nav-link' >Profile</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -173,13 +174,13 @@ const list = (anchor) => (
         {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>
-
+          
           <IconButton
             size="large"
             edge="start"
             color="default"
             aria-label="open drawer"
-            sx={{ mr: 5 }}
+            sx={{ mr: 3 }}
           >
             <MenuIcon />
           </IconButton>
@@ -194,16 +195,16 @@ const list = (anchor) => (
           </Drawer>
         </React.Fragment>
       ))}
-        
+          <Link to='/'className='nav-link' >
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block'}, color:'#06e19a', fontWeight: 'bold'}}
           >
-            Wooks Child
+           Wooks Child
           </Typography>
-        
+          </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="default">
