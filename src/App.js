@@ -1,10 +1,11 @@
 import React from "react";
-import AppBar1 from "./components/Appbar";
-import Artists from "./components/main/Artists";
-import Goods from "./components/main/Goods";
-import News from "./components/main/News";
+import AppBar1 from "./components/Appbar";    //네비게이션바
+import Main from "./components/main/Main";    //메인페이지
+import Profile from "./components/pofile/Profile";
+
+
 import Post from "./components/Post";
-import Sample from './components/Sample';
+
 const App = () => {
  
 
@@ -12,11 +13,9 @@ const App = () => {
       <div>
 
           <AppBar1 />
-          <Artists />
-          <Goods />
-          <News />
-
-          
+          <Main />
+        
+          <Profile />
           <Post />
       </div>
   )
