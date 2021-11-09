@@ -72,6 +72,7 @@ export default function Profile() {
                   로 페이지이동하면 수정안
                   될껀데 마우스올라가면 왜 커서안생기는지모르겟따 조까따 ㅠ
                   textarea여서 엔터까지 다먹으니깐 위에 변수지정해서 넣으면 엔터안먹ㅇ서 그냥따로불리해놈
+                  결국 시파 하드코딩하고있따. 템플릿 조까
                   덤벼 리액트 시!!!🔥🔥🔥🌏"
                   multiline
                   variant="standard"
