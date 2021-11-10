@@ -46,7 +46,7 @@ export default function Profile() {
          />
         
         <Box sx={{mt:2,ml:2,display: 'flex' }}><h1><b>{유저정보.userName}</b></h1><Box sx={{textAlign: 'right',mt:3}}>님 안녕하세요</Box></Box></Box>
-        <Button sx={{mt:10, width: 200, height: 80, textAlign: 'center'}}flex='1' variant="outlined" color="error"  >        로그아웃      </Button>
+        <Button sx={{mt:10, width: 200, height: 80, textAlign: 'center'}}flex='1' variant="outlined" color="error" onClick={()=>{console.log('로그아웃 ㄱ')}} >        로그아웃      </Button>
         </Box>
 
         <Divider sx={{m:2,mx:0}}/>      {/* 구분선 */}
@@ -94,14 +94,15 @@ export default function Profile() {
               { 내구릅.map((a)=>{
                 return(
                 <Box>
-                <Box sx={{ mt:2,mx:4, display: 'flex',justifyContent: 'space-between' }}>
+                <Box sx={{ mt:2,mx:4, display: 'flex', }}>
                 <Avatar
                   alt="Remy Sharp"
                   src={a.가수이미지}
                   sx={{  width: 50, height: 50, textAlign: 'center',  }}
                   />
-                  <Box  sx={{ fontWeight: 'light',fontSize: 'h6.fontSize',mt:1 }}>{a.name}</Box>
-                  <ClearIcon sx={{  mt:1, width: 30, height: 30, textAlign: 'center', }} />
+                    <Box  sx={{ mx:4,fontWeight: 'medium',fontSize: 'h6.fontSize',mt:1,justifyContent: 'space-between',width:'70%' }}>{a.name}</Box>
+                    <ClearIcon sx={{  mt:1, width: 30, height: 30, textAlign: 'center',cursor:'pointer' }} onClick={()=>{console.log('내아티스트삭제요청 ㄱ')}}/>
+                    
                   </Box>
                    <Divider sx={{mx:3,mt:2,}}/></Box>
                  )})}
@@ -113,17 +114,17 @@ export default function Profile() {
               { 구짜.map((a)=>{
                 return(
                 <Box>
-                <Box sx={{ mt:2,mx:4, display: 'flex',justifyContent: 'space-between' }}>
+                <Box sx={{ mt:2,mx:4, display: 'flex' }}>
                 <Avatar
                   alt="Remy Sharp"
                   src={a.goodsImg}
                   variant="rounded"
                   sx={{  width: 50, height: 50, textAlign: 'center', }}
                   />
-                  <Box  sx={{ fontWeight:'medium',textAlign:'left', }}>{a.goodsName}
+                  <Box  sx={{mx:4, fontWeight:'medium',justifyContent: 'space-between',width:'70%' }}>{a.goodsName}
                   <p><del>W</del>&nbsp;{a.goodsPrice}</p>
                   </Box>
-                  <ClearIcon sx={{  mt:1, width: 30, height: 30, textAlign: 'center', }} />
+                  <ClearIcon sx={{  mt:1, width: 30, height: 30, textAlign: 'center',cursor:'pointer' }} onClick={()=>{console.log('구쯔삭제요청 ㄱ')}} />
                   </Box>
                    <Divider sx={{mx:3,mt:1,}}/></Box>
                  )})}

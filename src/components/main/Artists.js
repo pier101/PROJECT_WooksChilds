@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Box } from '@mui/system';
-import {Route,Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export default function Artists() {
     let [box,set가수아이디] = useState([
@@ -27,7 +27,7 @@ export default function Artists() {
         { box.map((a,i)=>{
                     return(
                       <Link to='/test'className='nav-link' >
-            <Card  key={i} onClick={()=>{  console.log(  "이동처리하셈" )}} sx={{ maxWidth: 280, m:1 }}>
+            <Card  key={i} onClick={()=>{  console.log(  "이동처리하셈" )}} elevation={3} sx={{ maxWidth: 280, m:1 }}>
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -45,5 +45,5 @@ export default function Artists() {
         )}) }
         </Box>
         </>
-      );
+      )
     }
