@@ -10,8 +10,7 @@ import { Link } from 'react-router-dom';
 
 import { pink } from '@mui/material/colors';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
-// https://weverseshop.io/images/mockup-1@3x.f104bfaaf1616a890572339c59a22184.png
-// https://weverseshop.io/images/mockup-3@3x.2776bd6edddab582d48095db591a427a.png
+
 export default function Shop() {
     return (
         <div>
@@ -62,11 +61,7 @@ export default function Shop() {
                          </Box>
                          </Box>
 {/* ///////////////////////////////////// */}
-                        {/* 상품검색만들어보자 */}
-
-
-
-
+                    {/* 상품검색만들어보자 */}
 
                     {/* 가수 별 상품나열 */}
 
@@ -86,18 +81,8 @@ export default function Shop() {
                                     sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
                             </Box>
                         </Box>
-
-                     
-                        
-
-
-
-
                     </Box>
                 </Box>
-            
-
-
         </div>
     )
 }
