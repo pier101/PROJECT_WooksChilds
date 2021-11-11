@@ -24,8 +24,40 @@ const Signup = () => {
   };
 
   //post에서 주소를 받아온곳
-  const [address, setAddress] = React.useState("");
-  const [popup, setPopup] = React.useState("");
+  const [address, setAddress] = useState("");
+  const [popup, setPopup] = useState("");
+  const [idValue, setIdValue] = useState("")
+  const [pwValue, setPwValue] = useState("")
+  const [pwValue2, setPwValue2] = useState("")
+  const [nameValue, setNameValue] = useState("")
+  const [emailValue, setEmailValue] = useState("")
+  const [telValue, setTelValue] = useState("")
+  const [addressValue, setAddrValue] = useState("")
+
+
+ const idHandler = (e)=>{
+  setIdValue(e.target.value)
+ }
+ const pwHandler = (e)=>{
+  setPwValue(e.target.value)
+ }
+ const pwHandler2 = (e)=>{
+  setPwValue2(e.target.value)
+ }
+ const nameHandler = (e)=>{
+  setNameValue(e.target.value)
+  
+ }
+ console.log(nameHandler)
+ const emailHandler = (e)=>{
+  setEmailValue(e.target.value)
+ }
+ const telHandler = (e)=>{
+  setTelValue(e.target.value)
+ }
+ const addrHandler = (e)=>{
+  setAddrValue(e.target.value)
+ }
 
   //비밀번호 유효성 검사
   const checkPassword = (e) => {
@@ -36,12 +68,12 @@ const Signup = () => {
   };
 
   // 이메일 유효성 검사
-  // const checkEmail = (e) => {
-  //   var regExp =
-  //     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  const checkEmail = (e) => {
+    var regExp =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   //   // 형식에 맞는 경우 true 리턴
-  //   console.log("이메일 유효성 검사 :: ", regExp.test(e.target.value));
-  // };
+    console.log("이메일 유효성 검사 :: ", regExp.test(e.target.value));
+  };
 
   return (
     <Grid>
@@ -63,6 +95,7 @@ const Signup = () => {
           label="ID"
           placeholder="Enter your ID"
           fullWidth
+          onChange={idHandler}
         ></TextField>
 
         {/* 비밀번호 입력 */}
@@ -73,6 +106,7 @@ const Signup = () => {
           type="password"
           onBlur={checkPassword}
           fullWidth
+          onChange={pwHandler}
         ></TextField>
 
         {/* 비밀번호 확인 */}
@@ -83,6 +117,7 @@ const Signup = () => {
           type="password"
           onBlur={checkPassword}
           fullWidth
+          onChange={pwHandler2}
         ></TextField>
 
         {/* 이름 */}
@@ -91,6 +126,7 @@ const Signup = () => {
           label="Name"
           placeholder="Enter your name"
           fullWidth
+          onChange={nameHandler}
         ></TextField>
 
         {/* 성별 */}
@@ -117,8 +153,9 @@ const Signup = () => {
           // margin="20px"
           label="E-mail"
           placeholder="Enter your E-mail"
-          // onBlur={checkEmail}
+          onBlur={checkEmail}
           fullWidth
+          onChange={emailHandler}
         ></TextField>
 
         {/* 전화번호 */}
@@ -127,6 +164,7 @@ const Signup = () => {
           label="Phone-number"
           placeholder="Enter your Phone number"
           fullWidth
+          onChange={telHandler}
         ></TextField>
 
         {/* 주소 */}
@@ -135,6 +173,7 @@ const Signup = () => {
           label="Adress"
           placeholder="Enter your Adress"
           fullWidth
+          onChange={addrHandler}
         ></TextField>
 
         <Button

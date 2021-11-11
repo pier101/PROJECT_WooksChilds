@@ -271,6 +271,7 @@ const list = (anchor) => (
 
 
   return (
+    <>
     <Box sx={{ flexGrow: 1 , bgcolor: 'secondary.main' }}  >
       <AppBar position="fixed" sx={{ bgcolor: 'white' }}>
         <Toolbar>
@@ -355,5 +356,6 @@ const list = (anchor) => (
       {renderMenu}
     
     </Box>
+    </>
   );
 }
