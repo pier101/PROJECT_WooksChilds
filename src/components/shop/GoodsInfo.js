@@ -4,21 +4,49 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import {Carousel} from 'react-bootstrap'
 import { pink } from '@mui/material/colors';
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+import Radio from '@mui/material/Radio';
 
-// http://gdimg.gmarket.co.kr/1148197420/still/600?ver=1509035838
-// 핸드폰 "https://image1.marpple.co/files/u_1566217/2021/10/original/4485e633a3d954522280dc0fc47d6ee992878dcd7.jpg?q=90&w=1600&f=jpg"
 export default function GoodsInfo() {
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+    const [selecColor, setselecColor] = useState('black');//라디오버튼칼라
+    const [size, setsize] = useState('90');//라디오버튼 사이즈
+  
+    const handleChangeColor = (event) => {
+      setselecColor(event.target.value);
+    };
+    const handleChangeSize = (event) => {
+      setselecColor(event.target.value);
+    };
+  
+    const controlProps = (item) => ({
+      checked: selecColor === item,
+      onChange: handleChangeColor,
+      value: item,
+      name: 'color-radio-button-demo',
+      inputProps: { 'aria-label': item },
+    });
+    const sizeProps = (item) => ({
+      checked: size === item,
+      onChange: handleChangeSize,
+      value: item,
+      name: 'color-radio-button-demo',
+      inputProps: { 'aria-label': item },
+    });
+//////////////////////////////////////////////////////////////// 라디오끝
+    let [수량,set수량] = useState(1)
+
+    
     let[상품,set상품] = useState({
         얼굴:'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png',
-        가격:'3,000,000,000',
+        가격:30000,
         이름:'frontME(선미라는뜻)'
     },)
-
+    let 총가격= 상품.가격*수량;
+    
     return (
         <div>
              <Box sx={{mt:10, mx:'10%',display:'flex',}}>
-                 {/* 왼쪽고정 */}
+                 {/* 왼쪽고정 이미지 */}
                     <Box sx={{  fontWeight: 'bold',textAlign:'center',width:'55%', height:'10vh' }}>
                         <Box position="fixed" sx={{m:1, fontWeight: 'bold',width:'35%',color:'black' }}>
 
@@ -38,7 +66,7 @@ export default function GoodsInfo() {
                                     sx={{ position :'absolute',top:'25%',left:'25%', width: '45%', height: "60%", display: 'center', }}                                    />
 
                                 <Carousel.Caption >
-                                <h5>First slide label</h5>
+                                <h5>First slide label</h5>  
                                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                                 
                                 </Carousel.Caption>
@@ -111,13 +139,12 @@ export default function GoodsInfo() {
                     </Box>
 
 
-
                     {/* 오른쪽고정 */}
 
                 
                     <Box sx={{ fontWeight: 'bold',textAlign: 'left',fontSize:30, width:'50%',}}>
-                        <Box sx={{m:2, fontWeight: 'bold',textAlign: 'left',fontSize:30, }}>{상품.이름}~!😂🤣풰키지 </Box>
-                        <Box sx={{ pl:3 ,fontWeight: 'light' ,textAlign: 'left',fontSize:10, }}>"마지막 남은 췐스췐스 4종세트"</Box>
+                        <Box sx={{mt:2, fontWeight: 'bold',textAlign: 'left',fontSize:30, }}>{상품.이름}~!😂🤣풰키지 </Box>
+                        <Box sx={{ pl:2 ,fontWeight: 'light' ,textAlign: 'left',fontSize:10, }}>"마지막 남은 췐스췐스 4종 세트"</Box>
 
                         <Box sx={{ display:'flex',justifyContent: 'space-between',}}> 
                             <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:25, }}>{상품.가격} 원</Box>
@@ -126,13 +153,36 @@ export default function GoodsInfo() {
                            찜</Box>
                         </Box>
                         
-                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:15,color:'gray' }}> 색상  </Box>
-                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:15,color:'gray' }}> 사이즈  </Box>
+
+
+                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:15,color:'gray' }}> 색상 
+                        <Box sx={{ display:'flex',fontSize:15,}}>
+                            <Box sx={{ fontWeight: 'Medium',}}><Radio  {...controlProps('blue')}  size="small"/> blue  </Box>
+                            <Box sx={{ fontWeight: 'Medium',}}><Radio  {...controlProps('purple')} color="secondary" size="small" /> purple  </Box>
+                            <Box sx={{ fontWeight: 'Medium',}}><Radio  {...controlProps('green')} color="success"  size="small"/> green  </Box>
+                            <Box sx={{ fontWeight: 'Medium',}}><Radio  {...controlProps('black')} color="default"  size="small"/> black  </Box>
+                            <Box sx={{ fontWeight: 'Medium',}}><Radio  {...controlProps('red')} size="small" sx={{ color: pink[10],'&.Mui-checked': { color: pink[600],},}} /> red  </Box>
+                        </Box>
+                        </Box>
+                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:15,color:'gray' }}> 사이즈  
+                        <Box sx={{ display:'flex',fontSize:15,}}>
+                            <Box sx={{ fontWeight: 'Medium',}}><Radio  {...sizeProps('90')} color="default"  size="small"/> 90  </Box>
+                            <Box sx={{ fontWeight: 'Medium',}}><Radio  {...sizeProps('95')} color="default"  size="small"/> 95  </Box>
+                            <Box sx={{ fontWeight: 'Medium',}}><Radio  {...sizeProps('100')} color="default"  size="small"/> 100  </Box>
+                            <Box sx={{ fontWeight: 'Medium',}}><Radio  {...sizeProps('105')} color="default"  size="small"/> 105  </Box>
+                            <Box sx={{ fontWeight: 'Medium',}}><Radio  {...sizeProps('110')} color="default"  size="small"/> 110  </Box>
+                        </Box>
+                        </Box>
+
+
                         <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:15,color:'gray' }}> 수량  </Box>
+                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20,color:'gray' }}> 
+                        <input type='number' value={수량} onChange={(e)=>{set수량(e.target.value)}}/></Box>
+                            
                         <Divider sx={{m:2,mx:0}}/>  
                         <Box sx={{ display:'flex',justifyContent: 'space-between',}}> 
-                            <Box sx={{ pt:1, fontWeight: 'light' ,textAlign: 'left',fontSize:15, }}> 1개가격  * 수량선택 만들꺼임  </Box>
-                            <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:25, }}>{상품.가격} 원</Box>
+                            <Box sx={{ pt:1, fontWeight: 'light' ,textAlign: 'left',fontSize:15, }}> {수량}개 가격 얼마      </Box>
+                            <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:25, }}>{총가격}원</Box>
                         </Box>
 
                         

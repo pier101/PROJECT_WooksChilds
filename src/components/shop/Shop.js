@@ -81,6 +81,71 @@ export default function Shop() {
                                     sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
                             </Box>
                         </Box>
+                        <Box>
+                            <Link to='/goodsInfo'className='nav-link'>
+                            <Avatar
+                            alt="Remy Sharp"
+                            variant="square"
+                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
+                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
+                            /></Link>
+                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
+                                <Checkbox {...label} 
+                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
+                            </Box>
+                        </Box>
+                        <Box>
+                            <Link to='/goodsInfo'className='nav-link'>
+                            <Avatar
+                            alt="Remy Sharp"
+                            variant="square"
+                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
+                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
+                            /></Link>
+                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
+                                <Checkbox {...label} 
+                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
+                            </Box>
+                        </Box>
+                        <Box>
+                            <Link to='/goodsInfo'className='nav-link'>
+                            <Avatar
+                            alt="Remy Sharp"
+                            variant="square"
+                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
+                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
+                            /></Link>
+                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
+                                <Checkbox {...label} 
+                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
+                            </Box>
+                        </Box>
+                        <Box>
+                            <Link to='/goodsInfo'className='nav-link'>
+                            <Avatar
+                            alt="Remy Sharp"
+                            variant="square"
+                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
+                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
+                            /></Link>
+                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
+                                <Checkbox {...label} 
+                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
+                            </Box>
+                        </Box>
+                        <Box>
+                            <Link to='/goodsInfo'className='nav-link'>
+                            <Avatar
+                            alt="Remy Sharp"
+                            variant="square"
+                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
+                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
+                            /></Link>
+                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
+                                <Checkbox {...label} 
+                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
+                            </Box>
+                        </Box>
                     </Box>
                 </Box>
         </div>
