@@ -23,6 +23,7 @@ export default function Goods() {
             src={상품.goodsImg}
             alt="First slide"
             /> 
+      
           <Carousel.Caption >
             
            
@@ -32,6 +33,7 @@ export default function Goods() {
                 extra attention to featured content or information.</p>
           </Carousel.Caption></Link>
         </Carousel.Item> 
+    
         )})};
        
      

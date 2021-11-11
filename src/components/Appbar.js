@@ -17,12 +17,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 
-import {Route,Link} from 'react-router-dom';  //라우터 돔
-
-export default function AppBar1() {
+export default function AppBar1(props) {
+  const isLogin = props.isLogin
+  console.log(isLogin)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -43,6 +43,10 @@ export default function AppBar1() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const onLogout = ()=>{
+    sessionStorage.removeItem('user_id')
+    document.location.href = '/login'
+  }
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -57,15 +61,37 @@ export default function AppBar1() {
         vertical: 'top',
         horizontal: 'right',
       }}
-      open={isMenuOpen}
+      open={isMenuOpen} 
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}><Link to='/Profile'className='nav-link' >Profile</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
+  const renderMenuX = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen} 
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
+
+  //로그인 안되있을경우
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -113,6 +139,84 @@ export default function AppBar1() {
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
+      </MenuItem>
+      <MenuItem className="login" isLogin={isLogin}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="default"
+        >
+          <AccountCircle />
+        </IconButton >
+        <p>Login</p>
+      </MenuItem>
+    </Menu>
+  );
+
+  //로그인되있을 경우
+  
+  const renderMobileMenuX = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="default">
+          <Badge badgeContent={0} color="error">
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="default"
+        >
+          <Badge badgeContent={0} color="error">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="default"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+      <MenuItem className="login" isLogin={isLogin}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="default"
+          onClick={onLogout}
+        >
+          <AccountCircle />
+        </IconButton >
+        <p>Logout</p>
       </MenuItem>
     </Menu>
   );
@@ -174,13 +278,12 @@ const list = (anchor) => (
         {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>
-          
           <IconButton
             size="large"
             edge="start"
             color="default"
             aria-label="open drawer"
-            sx={{ mr: 3 }}
+            sx={{ mr: 5 }}
           >
             <MenuIcon />
           </IconButton>
@@ -195,21 +298,21 @@ const list = (anchor) => (
           </Drawer>
         </React.Fragment>
       ))}
-          <Link to='/'className='nav-link' >
+        
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block'}, color:'#06e19a', fontWeight: 'bold'}}
           >
-           Wooks Child
+            Wooks Child
           </Typography>
-          </Link>
+        
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="default">
               <Badge badgeContent={0} color="error">
-                <MailIcon />
+                <MailIcon/>
               </Badge>
             </IconButton>
             <IconButton
@@ -247,8 +350,9 @@ const list = (anchor) => (
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+      {!isLogin ? renderMobileMenu: renderMobileMenuX}
       {renderMenu}
+    
     </Box>
   );
 }

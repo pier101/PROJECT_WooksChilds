@@ -6,7 +6,6 @@ import {Carousel} from 'react-bootstrap'
 import { pink } from '@mui/material/colors';
 import Radio from '@mui/material/Radio';
 
-
 export default function GoodsInfo() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
     const [selecColor, setselecColor] = useState('black');//라디오버튼칼라
