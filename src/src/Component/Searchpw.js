@@ -19,12 +19,12 @@ const Searchpw = () => {
 
   <Grid>
     <Paper elevation={10} style={paperStyle}>
-      <Grid align="center">
+      <Grid align='center'>
         <Avatar style={avatarStyle}>
           <AssignmentIndIcon></AssignmentIndIcon>
         </Avatar>
-        <h2>비밀번호 찾기</h2>
-        <Typography variant="caption">
+        <h2>ID/비밀번호 찾기</h2>
+        <Typography variant='caption'>
           아래의 칸에 알맞는 정보를 입력해 주세요.
         </Typography>
       </Grid>
