@@ -32,26 +32,26 @@ const App = () => {
       </div>
     );
   } 
-  else {
-    return(
-      <Route  path="/login" isLogin={isLogin} component={Login} exact />
-    )
-  }
-  
-  // if(!isLogin){
-  //   return (
-  //       <div>
-  //         <AppBar1 isLogin={isLogin} />
-  //         <Route  path="/login" isLogin={isLogin} component={Login} exact />
-  //         <Route  path="/" component={Main} isLogin={isLogin} exact />
-  //         <Route  path="/artist/:name" isLogin={isLogin} component={Artist} />
-  //         {/* 철순형꺼 */}
-  //         <Route path="/Profile" component={Profile} exact/> 
-  //         <Route path="/Shop" component={Shop} exact/> 
-  //         <Route path="/GoodsInfo" component={GoodsInfo} exact/> 
-  //     </div>
-  //   );
+  // else {
+  //   return(
+  //     <Route  path="/login" isLogin={isLogin} component={Login} exact />
+  //   )
   // }
+  
+  if(!isLogin){
+    return (
+        <div>
+          <AppBar1 isLogin={isLogin} />
+          <Route  path="/login" isLogin={isLogin} component={Login} exact />
+          <Route  path="/" component={Main} isLogin={isLogin} exact />
+          <Route  path="/artist/:name" isLogin={isLogin} component={Artist} />
+          {/* 철순형꺼 */}
+          <Route path="/Profile" component={Profile} exact/> 
+          <Route path="/Shop" component={Shop} exact/> 
+          <Route path="/GoodsInfo" component={GoodsInfo} exact/> 
+      </div>
+    );
+  }
 
 
 };
