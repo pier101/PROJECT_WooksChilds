@@ -23,7 +23,6 @@ const App = () => {
           <Route path="/Shop" component={Shop} exact={true}/> 
           <Route path="/GoodsInfo" component={GoodsInfo} exact={true}/> 
           
-          
 
           
           {/* <Post /> */}

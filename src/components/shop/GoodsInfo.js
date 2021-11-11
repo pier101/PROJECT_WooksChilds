@@ -6,6 +6,7 @@ import {Carousel} from 'react-bootstrap'
 import { pink } from '@mui/material/colors';
 import Radio from '@mui/material/Radio';
 
+
 export default function GoodsInfo() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
     const [selecColor, setselecColor] = useState('black');//라디오버튼칼라
@@ -187,15 +188,152 @@ export default function GoodsInfo() {
 
                         
                         <Button outlined="contained" color="inherit"sx={{width:'100%', bgcolor:'black',color:"white", fontWeight: 'bold',textAlign: 'center'}}>결 제 하 기</Button>
+                        {/* /////////////////////////////////////////////결제끝 상품 설명 */}
 
+
+
+                        <Box sx={{ mt:5, fontWeight: 'bold',textAlign: 'center',fontSize:30, width:'100%',}}>
+                        
+                            <Box sx={{mt:5, fontWeight: 'bold',fontSize:30, }}> 티샤쓰 기본설명 </Box>
+                            <Box sx={{mt:5, fontWeight: 'Medium',fontSize:20, }}> ※ 모델컷의 경우 촬영장소의 환경에 따라 실제 색상과 상이할 수 있습니다.
+                            남녀공용
+                            도톰한 17수 라운드 티셔츠 입니다.
+                            오래입어도 쉽게 모양이 변하지 않는 상품입니다. </Box>
+                            <Box sx={{ pt:2,pb:5, fontWeight: 'bold',fontSize:20, textAlign: 'left',}}>
+                                 <li>소재: 면</li> 
+                                 <li>제조사 : Printstar</li> 
+                                 <li>제조국 : Made in 경일아카뒈미</li> 
+                                 <li>사이즈 : S,M,L,XL</li> 
+                                 <li>신축성 : 줠라  좋음</li> 
+                                 <li>감촉 : 아기피부 감촉</li> 
+                                 <li>두께 : 구름 소재</li> 
+                                 </Box>
+                                 <Divider sx={{m:2,mx:0}}/>  
+                            <Box sx={{mt:5, fontWeight: 'bold',fontSize:20, }}>세탁 How do you do? </Box>
+                            <Box sx={{ pt:2,pb:5, fontWeight: 'Medium',fontSize:20, textAlign: 'left',}}>
+                                 <li>드라이크리닝 또는 단독 손세탁가능합니다.</li> 
+                                 <li>나염/프린트 제품 세탁시 뒤집어 찬물에 세탁하셔야 합니다.</li> 
+                                 <li>다리미 사용 시 천을 올린 후 다림질해 주십시오.</li> 
+                                 <li>사이즈 : S,M,L,XL</li> 
+                                 <li>신축성 : 줠라  좋음</li> 
+                                 <li>감촉 : 아기피부 감촉</li> 
+                                 <li>두께 : 구름 소재</li> 
+                                 </Box>
+                                 <Divider sx={{m:2,mx:0}}/> 
+                            <Box sx={{mt:5,mb:5, fontWeight: 'bold',fontSize:30, }}>사진 보셈 </Box> 
+
+                            <img    style={{ width: '100%', margin:1,top:'10vh'}}
+                                    className="d-block "
+                                    src='/images/Tshirt.PNG'
+                                    alt="First slide"
+                                    />
+                            <Box sx={{ mt:5, fontWeight: 'bold',textAlign: 'center',fontSize:30, width:'100%',}}>
+                        
+                            <Box sx={{mt:5, fontWeight: 'bold',fontSize:30, }}> 쏄폰 기본설명 </Box>
+                            <Box sx={{mt:5, fontWeight: 'Medium',fontSize:20, }}> ※ 모델컷의 경우 촬영장소의 환경에 따라 실제 색상과 상이할 수 있습니다.
+                            남녀공용
+                            도톰한 17수 라운드 티셔츠 입니다.
+                            오래입어도 쉽게 모양이 변하지 않는 상품입니다. </Box>
+                            <Box sx={{ pt:2,pb:5, fontWeight: 'bold',fontSize:20, textAlign: 'left',}}>
+                                 <li>소재: 면</li> 
+                                 <li>제조사 : Printstar</li> 
+                                 <li>제조국 : Made in 경일아카뒈미</li> 
+                                 <li>사이즈 : S,M,L,XL</li> 
+                                 <li>신축성 : 줠라  좋음</li> 
+                                 <li>감촉 : 아기피부 감촉</li> 
+                                 <li>두께 : 구름 소재</li> 
+                                 </Box>
+                                 <Divider sx={{m:2,mx:0}}/>  
+                            <Box sx={{mt:5, fontWeight: 'bold',fontSize:20, }}>세탁 How do you do? </Box>
+                            <Box sx={{ pt:2,pb:5, fontWeight: 'Medium',fontSize:20, textAlign: 'left',}}>
+                                 <li>드라이크리닝 또는 단독 손세탁가능합니다.</li> 
+                                 <li>나염/프린트 제품 세탁시 뒤집어 찬물에 세탁하셔야 합니다.</li> 
+                                 <li>다리미 사용 시 천을 올린 후 다림질해 주십시오.</li> 
+                                 <li>사이즈 : S,M,L,XL</li> 
+                                 <li>신축성 : 줠라  좋음</li> 
+                                 <li>감촉 : 아기피부 감촉</li> 
+                                 <li>두께 : 구름 소재</li> 
+                                 </Box>
+                                 <Divider sx={{m:2,mx:0}}/> 
+                            <Box sx={{mt:5,mb:5, fontWeight: 'bold',fontSize:30, }}>사진 보셈 </Box> 
+                            <img    style={{ width: '100%', margin:1,top:'10vh'}}
+                                    className="d-block "
+                                    src='/images/cellphpeon.PNG'
+                                    alt="First slide"
+                                    />
+                            <Box sx={{mt:5, fontWeight: 'bold',fontSize:30, }}> 씨꺼렛케이스 기본설명 </Box>
+                            <Box sx={{mt:5, fontWeight: 'Medium',fontSize:20, }}> ※ 모델컷의 경우 촬영장소의 환경에 따라 실제 색상과 상이할 수 있습니다.
+                            남녀공용
+                            도톰한 17수 라운드 티셔츠 입니다.
+                            오래입어도 쉽게 모양이 변하지 않는 상품입니다. </Box>
+                            <Box sx={{ pt:2,pb:5, fontWeight: 'bold',fontSize:20, textAlign: 'left',}}>
+                                 <li>소재: 면</li> 
+                                 <li>제조사 : Printstar</li> 
+                                 <li>제조국 : Made in 경일아카뒈미</li> 
+                                 <li>사이즈 : S,M,L,XL</li> 
+                                 <li>신축성 : 줠라  좋음</li> 
+                                 <li>감촉 : 아기피부 감촉</li> 
+                                 <li>두께 : 구름 소재</li> 
+                                 </Box>
+                                 <Divider sx={{m:2,mx:0}}/>  
+                            <Box sx={{mt:5, fontWeight: 'bold',fontSize:20, }}>세탁 How do you do? </Box>
+                            <Box sx={{ pt:2,pb:5, fontWeight: 'Medium',fontSize:20, textAlign: 'left',}}>
+                                 <li>드라이크리닝 또는 단독 손세탁가능합니다.</li> 
+                                 <li>나염/프린트 제품 세탁시 뒤집어 찬물에 세탁하셔야 합니다.</li> 
+                                 <li>다리미 사용 시 천을 올린 후 다림질해 주십시오.</li> 
+                                 <li>사이즈 : S,M,L,XL</li> 
+                                 <li>신축성 : 줠라  좋음</li> 
+                                 <li>감촉 : 아기피부 감촉</li> 
+                                 <li>두께 : 구름 소재</li> 
+                                 </Box>
+                                 <Divider sx={{m:2,mx:0}}/> 
+                            <Box sx={{mt:5,mb:5, fontWeight: 'bold',fontSize:30, }}>사진 보셈 </Box> 
+                            <img    style={{ width: '100%', margin:1,top:'10vh'}}
+                                    className="d-block "
+                                    src='/images/cigarettes.PNG'
+                                    alt="First slide"
+                                    />
+                                    <Box sx={{mt:5, fontWeight: 'bold',fontSize:30, }}> 키링 기본설명 </Box>
+                            <Box sx={{mt:5, fontWeight: 'Medium',fontSize:20, }}> ※ 모델컷의 경우 촬영장소의 환경에 따라 실제 색상과 상이할 수 있습니다.
+                            남녀공용
+                            도톰한 17수 라운드 티셔츠 입니다.
+                            오래입어도 쉽게 모양이 변하지 않는 상품입니다. </Box>
+                            <Box sx={{ pt:2,pb:5, fontWeight: 'bold',fontSize:20, textAlign: 'left',}}>
+                                 <li>소재: 면</li> 
+                                 <li>제조사 : Printstar</li> 
+                                 <li>제조국 : Made in 경일아카뒈미</li> 
+                                 <li>사이즈 : S,M,L,XL</li> 
+                                 <li>신축성 : 줠라  좋음</li> 
+                                 <li>감촉 : 아기피부 감촉</li> 
+                                 <li>두께 : 구름 소재</li> 
+                                 </Box>
+                                 <Divider sx={{m:2,mx:0}}/>  
+                            <Box sx={{mt:5, fontWeight: 'bold',fontSize:20, }}>세탁 How do you do? </Box>
+                            <Box sx={{ pt:2,pb:5, fontWeight: 'Medium',fontSize:20, textAlign: 'left',}}>
+                                 <li>드라이크리닝 또는 단독 손세탁가능합니다.</li> 
+                                 <li>나염/프린트 제품 세탁시 뒤집어 찬물에 세탁하셔야 합니다.</li> 
+                                 <li>다리미 사용 시 천을 올린 후 다림질해 주십시오.</li> 
+                                 <li>사이즈 : S,M,L,XL</li> 
+                                 <li>신축성 : 줠라  좋음</li> 
+                                 <li>감촉 : 아기피부 감촉</li> 
+                                 <li>두께 : 구름 소재</li> 
+                                 </Box>
+                                 <Divider sx={{m:2,mx:0}}/> 
+                            <Box sx={{mt:5,mb:5, fontWeight: 'bold',fontSize:30, }}>사진 보셈 </Box> 
+                            <img    style={{ width: '100%', margin:1,top:'10vh'}}
+                                    className="d-block "
+                                    src='/images/keyring.PNG'
+                                    alt="First slide"
+                                    />
+
+
+
+
+
+
+                            </Box>
+                        </Box>
                     </Box>
-                   
-
-
-
-
-
-
                 </Box>
         </div>
     )
