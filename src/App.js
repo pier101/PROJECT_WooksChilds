@@ -22,18 +22,18 @@ const App = () => {
       console.log("isLogin ?? ::", isLogin);
     }
   });
-  if (isLogin) {
-    return (
-      <div>
-        <AppBar1 isLogin={isLogin} />
-        <Route  path="/" component={Main} isLogin={isLogin} exact />
-        <Route  path="/artist/:name" isLogin={isLogin} component={Artist} />
-        <Route path="/Profile" component={Profile} exact/> 
-        <Route path="/Shop" component={Shop} exact/> 
-        <Route path="/GoodsInfo" component={GoodsInfo} exact/> 
-      </div>
-    );
-  } 
+  // if (isLogin) {
+  //   return (
+  //     <div>
+  //       <AppBar1 isLogin={isLogin} />
+  //       <Route  path="/" component={Main} isLogin={isLogin} exact />
+  //       <Route  path="/artist/:name" isLogin={isLogin} component={Artist} />
+  //       <Route path="/Profile" component={Profile} exact/> 
+  //       <Route path="/Shop" component={Shop} exact/> 
+  //       <Route path="/GoodsInfo" component={GoodsInfo} exact/> 
+  //     </div>
+  //   );
+  // } 
   // else {
   //   return(
   //     <Route  path="/login" isLogin={isLogin} component={Login} exact />
