@@ -3,6 +3,7 @@ import Thumbnail from './Thumbnail'
 import Goods from './Goods'
 import News from './News'
 import Post from './Post'
+import Footer from './Footer'
 //import Testartist from './testartist' 
 //import Artist from './components/artist'
 const index = (props) => {
@@ -13,7 +14,7 @@ const index = (props) => {
           <Thumbnail/>
           <Goods />
           <News />
-          <Post />
+          <Footer />
         </div>
     )
 }

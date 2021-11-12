@@ -1,5 +1,6 @@
 import React from "react";
 import {AppBar,Box,Toolbar,IconButton,Typography,Badge,MenuItem,Menu} from '@mui/material';
+import {Link} from 'react-router-dom'
 
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -64,7 +65,7 @@ export default function AppBar1(props) {
       open={isMenuOpen} 
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link to='/profile'className='nav-link'>Profile</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -83,8 +84,8 @@ export default function AppBar1(props) {
       }}
       open={isMenuOpen} 
       onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+    ><Link to='/goodsInfo'className='nav-link'>
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem></Link>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -138,7 +139,7 @@ export default function AppBar1(props) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <Link to='/Profile'className='nav-link'><p>Profile</p></Link>
       </MenuItem>
       <MenuItem className="login" isLogin={isLogin}>
         <IconButton
@@ -203,7 +204,7 @@ export default function AppBar1(props) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <Link to='/profile'className='nav-link'><p>Profile</p></Link> 
       </MenuItem>
       <MenuItem className="login" isLogin={isLogin}>
         <IconButton
@@ -298,7 +299,7 @@ const list = (anchor) => (
           </Drawer>
         </React.Fragment>
       ))}
-        
+        <Link to='/'className='nav-link'>
           <Typography
             variant="h6"
             noWrap
@@ -307,7 +308,7 @@ const list = (anchor) => (
           >
             Wooks Child
           </Typography>
-        
+        </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="default">
