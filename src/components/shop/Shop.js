@@ -16,7 +16,7 @@ export default function Shop() {
         <div>
            
                 <Box sx={{}}>
-                    <Box sx={{ pt:'10%',fontWeight: 'bold',textAlign: 'center',color:'#06e19a',fontSize:100, }}>GOOODS SHOP</Box>
+                    <Box sx={{ pt:'8%', pb:'5%',fontWeight: 'bold',textAlign: 'center',color:'#06e19a',fontSize:100, }}>GOOODS SHOP</Box>
                         <Box sx={{ bgcolor:'#06e19a',fontWeight: 'bold',textAlign: 'center',color:'#06e19a', }}>
                             <Box sx={{mx:'10%'}}>
                         

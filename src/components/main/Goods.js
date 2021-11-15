@@ -34,7 +34,7 @@ export default function Goods() {
           </Carousel.Caption></Link>
         </Carousel.Item> 
     
-        )})};
+        )})}
        
      
 

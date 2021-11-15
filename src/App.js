@@ -12,6 +12,9 @@ import Profile from "./components/profile/Profile"
 import GoodsInfo from "./components/shop/GoodsInfo";
 import Payment from "./components/shop/Payment"
 import Signup from "./components/Login/Signup";
+
+
+
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
 
