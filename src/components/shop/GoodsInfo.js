@@ -5,8 +5,14 @@ import Favorite from '@mui/icons-material/Favorite';
 import {Carousel} from 'react-bootstrap'
 import { pink } from '@mui/material/colors';
 import Radio from '@mui/material/Radio';
+import { Link } from 'react-router-dom';
 
-export default function GoodsInfo() {
+
+///////////////////결제 컴포넌트
+import {useHistory} from "react-router";
+import $ from "jquery";
+
+ function GoodsInfo() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
     const [selecColor, setselecColor] = useState('black');//라디오버튼칼라
     const [size, setsize] = useState('90');//라디오버튼 사이즈
@@ -15,7 +21,7 @@ export default function GoodsInfo() {
       setselecColor(event.target.value);
     };
     const handleChangeSize = (event) => {
-      setselecColor(event.target.value);
+        setsize(event.target.value);
     };
   
     const controlProps = (item) => ({
@@ -33,15 +39,64 @@ export default function GoodsInfo() {
       inputProps: { 'aria-label': item },
     });
 //////////////////////////////////////////////////////////////// 라디오끝
-    let [수량,set수량] = useState(1)
+    const [수량,set수량] = useState(1)
 
     
-    let[상품,set상품] = useState({
+    const [상품,set상품] = useState({
         얼굴:'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png',
-        가격:30000,
+        가격:'30000',
         이름:'frontME(선미라는뜻)'
     },)
-    let 총가격= 상품.가격*수량;
+    const 총가격= 상품.가격*수량;
+//////////////////////////////////////////////////////////////////////////////////결제 넘기기
+const history = useHistory();
+const [content] = useState({
+    // Default form set
+    is_direct: 'N',                               // 결제창 방식 (DIRECT: Y | POPUP: N)
+    pay_type: 'transfer',                         // 결제수단
+    work_type: 'CERT',                            // 결제요청방식
+    card_ver: '',                                  // DEFAULT: 01 (01: 정기결제 플렛폼, 02: 일반결제 플렛폼), 카드결제 시 필수
+    payple_payer_id: '',                          // 결제자 고유ID (본인인증 된 결제회원 고유 KEY)
+    buyer_no: '2335',                             // 가맹점 회원 고유번호
+    buyer_name: '홍길동',                         // 결제자 이름
+    buyer_hp: '01012345678',                      // 결제자 휴대폰 번호
+    buyer_email: 'test@payple.kr',                // 결제자 Email
+    buy_goods: '휴대폰',                          // 결제 상품
+    buy_count: '',                                // 결제 상품 개수
+    buy_price: '1000',                            // 결제 금액
+    buy_total: '1000',                            // 결제 금액
+    buy_istax: 'Y',                               // 과세여부 (과세: Y | 비과세(면세): N)
+    buy_taxtotal: '',                             // 부가세(복합과세인 경우 필수)
+    order_num: createOid(),                       // 주문번호
+    pay_year: '',                                 // [정기결제] 결제 구분 년도
+    pay_month: '',                                // [정기결제] 결제 구분 월
+    is_reguler: 'N',                              // 정기결제 여부 (Y | N)
+    is_taxsave: 'N',                              // 현금영수증 발행여부
+    simple_flag: 'N',                             // 간편결제 여부
+    auth_type: 'sms'                              // [간편결제/정기결제] 본인인증 방식 (sms : 문자인증 | pwd : 패스워드 인증)
+});
+
+const handleChange = (e) => {
+    content[e.target.name] = e.target.value;
+}
+////////////////////결제넘어가기전에 개인정보 여기에 입력해서넘길꺼임
+const handleSubmit = (e) => {  //버틑눌러서
+    e.preventDefault();
+    content.buy_total = 총가격
+    content.buy_count = 수량
+    content.buy_goods = 상품.이름
+    content.buy_price = 상품.가격
+    // content.buyer_name =  사용자이름
+    // content.buyer_hp= 사용자 핸드폰
+    // content.buyer_email =사용자 이메일
+    
+    
+    history.push({
+        pathname: '/Payment',
+        state: {content: content},
+    });
+    console.log(history)
+}
     
     return (
         <div>
@@ -141,8 +196,8 @@ export default function GoodsInfo() {
 
                     {/* 오른쪽고정 */}
 
-                
                     <Box sx={{ fontWeight: 'bold',textAlign: 'left',fontSize:30, width:'50%',}}>
+                   
                         <Box sx={{mt:2, fontWeight: 'bold',textAlign: 'left',fontSize:30, }}>{상품.이름}~!😂🤣풰키지 </Box>
                         <Box sx={{ pl:2 ,fontWeight: 'light' ,textAlign: 'left',fontSize:10, }}>"마지막 남은 췐스췐스 4종 세트"</Box>
 
@@ -180,13 +235,18 @@ export default function GoodsInfo() {
                         <input type='number' value={수량} onChange={(e)=>{set수량(e.target.value)}}/></Box>
                             
                         <Divider sx={{m:2,mx:0}}/>  
+                        <form id="orderForm" name="orderForm" onChange={handleChange}>
                         <Box sx={{ display:'flex',justifyContent: 'space-between',}}> 
                             <Box sx={{ pt:1, fontWeight: 'light' ,textAlign: 'left',fontSize:15, }}> {수량}개 가격 얼마      </Box>
-                            <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:25, }}>{총가격}원</Box>
+                            <Box    sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:25, }}>{총가격}원</Box>
+                            
                         </Box>
+                        </form>
+                        <Button onClick={handleSubmit} outlined="contained" color="inherit"sx={{mt:1, width:'100%',height:'0.7%' ,bgcolor:'black',color:"white", fontWeight: 'bold',fontSize:20,textAlign: 'center'}}>결 제 하 기</Button>
+                       
 
-                        
-                        <Button outlined="contained" color="inherit"sx={{width:'100%', bgcolor:'black',color:"white", fontWeight: 'bold',textAlign: 'center'}}>결 제 하 기</Button>
+
+
                         {/* /////////////////////////////////////////////결제끝 상품 설명 */}
 
 
@@ -325,17 +385,56 @@ export default function GoodsInfo() {
                                     alt="First slide"
                                     />
 
-
-
-
-
-
                             </Box>
                         </Box>
                     </Box>
                 </Box>
         </div>
     )
+    //상품 고유번호 !!!!!!!!!!!!!!!!!!!!!!
+    
 }
 
- 
+$(document).ready(function () {
+    $("#card_ver_view").css('display', 'none');
+    // 결제 타입에 따라 관련 selectTag의 css속성 변경
+    $("#pay_type").on('change', function (e) {
+
+        e.preventDefault();
+        const this_val = $(this).val();
+
+        if (this_val === 'card') {
+            $("#taxsave_view").css('display', 'none');
+            $("#card_ver_view").css('display', '');
+        } else {
+            $("#taxsave_view").css('display', '');
+            $("#card_ver_view").css('display', 'none');
+        }
+        //카드 결제유형(정기, 일반)에 따라 selectTag의 css속성 변경
+        $('#card_ver').on('change', function () {
+            if ($(this).val() === '01') {
+                $('#is_reguler_view').css('display', '');
+                $('#pay_year_view').css('display', '');
+                $('#pay_month_view').css('display', '');
+                $('#work_type option[value*="AUTH"]').prop('disabled', false);
+            } else {
+                $('#is_reguler_view').css('display', 'none');
+                $('#pay_year_view').css('display', 'none');
+                $('#pay_month_view').css('display', 'none');
+                $('#work_type option[value*="AUTH"]').prop('disabled', true);
+            }
+        });
+    });
+});
+const createOid = () => {
+    const now_date = new Date();
+    let now_year = now_date.getFullYear()
+    let now_month = now_date.getMonth() + 1
+    now_month = (now_month < 10) ? '0' + now_month : now_month
+    let now_day = now_date.getDate()
+    now_day = (now_day < 10) ? '0' + now_day : now_day
+    const datetime = now_date.getTime();
+    return 'test' + now_year + now_month + now_day + datetime;
+};
+
+ export default GoodsInfo;

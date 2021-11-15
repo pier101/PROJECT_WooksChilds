@@ -10,7 +10,8 @@ import Login from "./components/Login";
 import Shop from './components/shop/Shop'
 import Profile from "./components/profile/Profile"
 import GoodsInfo from "./components/shop/GoodsInfo";
-
+import Payment from "./components/shop/Payment"
+import Signup from "./components/Login/Signup";
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
 
@@ -45,12 +46,16 @@ const App = () => {
         <div>
           <AppBar1 isLogin={isLogin} />
           <Route  path="/login" isLogin={isLogin} component={Login} exact />
-          <Route  path="/" component={Main} isLogin={isLogin} exact />
+          <Route  path="/"  isLogin={isLogin}component={Main} exact />
           <Route  path="/artist/:name" isLogin={isLogin} component={Artist} />
           {/* 철순형꺼 */}
           <Route path="/Profile" component={Profile} exact/> 
           <Route path="/Shop" component={Shop} exact/> 
           <Route path="/GoodsInfo" component={GoodsInfo} exact/> 
+          <Route path="/Payment" component={Payment} exact/> 
+          <Route  path="/Signup" isLogin={isLogin} component={Signup} exact />
+          
+          
       </div>
     );
   }

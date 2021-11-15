@@ -70,7 +70,7 @@ const Login = (props) => {
       <Paper elevation={10} style={paperStyle}>
         <Grid align="center">
           <Avatar style={avatarStyle}>
-            <LockIcon></LockIcon>
+            <LockIcon />
           </Avatar>
           <br></br>
           <h2>로그인</h2>
