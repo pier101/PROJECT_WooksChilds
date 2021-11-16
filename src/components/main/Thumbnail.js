@@ -6,48 +6,43 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Box } from '@mui/system';
 import {Link,Route } from 'react-router-dom'
-import Artist from '../artist'
 import axios from 'axios'
 
 export default function Artists() {
-    let [box,set가수아이디] = useState([
-    {가수이름:"CL",가수이미지:"https://cdn-contents.weverse.io/admin/xlx2048/jpg/1c9a49d6725c4cff94802adee73b3591992.jpg"},
-    {가수이름:"WINNER",가수이미지:"https://cdn-contents.weverse.io/admin/xlx2048/png/122262f1689046e7b47f568a3f5c1765066.png"},
-    {가수이름:"BLACKPINK",가수이미지:"https://cdn-contents.weverse.io/admin/xlx2048/png/9748dae239044e65835bd894768beebe971.png"},
-    {가수이름:"FTILAND",가수이미지:"https://cdn-contents.weverse.io/admin/xlx2048/png/0d1c0a2d47b24cbe88d3e37ef41e1048379.png"},
-    {가수이름:"GFRIEND",가수이미지:"https://cdn-contents.weverse.io/admin/xlx2048/png/12529b280a424913b549ac2f73f00d28081.png"},
-    {가수이름:"cl",가수이미지:"https://cdn-contents.weverse.io/admin/xlx2048/jpg/1c9a49d6725c4cff94802adee73b3591992.jpg"},
-    {가수이름:"cl",가수이미지:"https://cdn-contents.weverse.io/admin/xlx2048/jpg/1c9a49d6725c4cff94802adee73b3591992.jpg"},
-    {가수이름:"cl",가수이미지:"https://cdn-contents.weverse.io/admin/xlx2048/jpg/1c9a49d6725c4cff94802adee73b3591992.jpg"},
-    {가수이름:"cl",가수이미지:"https://cdn-contents.weverse.io/admin/xlx2048/jpg/1c9a49d6725c4cff94802adee73b3591992.jpg"},
-    {가수이름:"cl",가수이미지:"https://cdn-contents.weverse.io/admin/xlx2048/jpg/1c9a49d6725c4cff94802adee73b3591992.jpg"},]);
+    const  [artistCard,setArtistCard] = useState([]);
+    //로딩시 카드불러올꺼임
+    useEffect(()=>{  
+       
+             axios.get(`http://localhost:5000/artistCard`) //package.json 밑에 (proxy:주소) 넣어주면 경로에 서버주소 안 넣어도 됨
+            .then( (res)=>{setArtistCard(res.data)
+            console.log(res.data)
+          })
+          
+        },[])
 
-   
 
     return (
       <>
               <Box sx={{mt: 15, mx: "10%"  ,display: 'flex',  flexWrap: 'wrap', justifyContent: 'center' ,}}>
-            { box.map((a,i)=>{
+            { artistCard.map((a,i)=>{
                         return(
-           <Link to={`/artist/${a.가수이름}`} value={a.가수이름} > 
-                          
+                          <Link to={`/artist/${a.artistName}`} value={a.artistName} > 
                             <Card  key={i} onClick={()=>{  console.log(  "이동처리하셈" )}} sx={{ maxWidth: 280, m:1 }}>
                                 <CardActionArea>
                                   <CardMedia
                                     component="img"
                                     height="250"
-                                    image={a.가수이미지}
+                                    image={a.artistCardImg}
                                     alt="green iguana"
                                   />
                                   <CardContent>
                                     <Typography   sx={{ height:25, fontStyle: 'italic'  }} gutterBottom variant="h4" component="div">
-                                      {a.가수이름}
+                                      {a.artistName}
                                     </Typography>
                                   </CardContent>  
                                 </CardActionArea>
                             </Card>
-                            
-            </Link>
+                          </Link>
             )}) }
     
             </Box>

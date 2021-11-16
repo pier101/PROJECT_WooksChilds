@@ -34,6 +34,7 @@ const Artist = ({match},props) => {
         };  
         axiosData();
     },[])
+    
     const ChangePostContent = e=> {
         setContent(e.target.value)
     }

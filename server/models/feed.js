@@ -11,7 +11,7 @@ module.exports = class Feed extends Sequelize.Model {
                     autoIncrement: true,
                 },
                 feedContent: {
-                    type: Sequelize.STRING(45),
+                    type: Sequelize.STRING(300),
                     allowNull: true,
                 },
                 feedCreated: {

@@ -4,6 +4,7 @@ const cors = require("cors");
 const pageRouter = require("./router/page.js");
 const artistRouter = require('./router/artist')
 const authRouter = require('./router/auth')
+const Artistcards = require('./models/artistcard')
 
 
 
@@ -24,6 +25,18 @@ app.use(express.json());
 app.use("/", pageRouter);
 app.use('/artist', artistRouter)
 app.use('/auth', authRouter)
+
+
+
+////////main 페이지 아티스트카드 불러올꺼
+app.get('/artistCard', async (req, res, next) => {
+  try {
+      const artistcards = await Artistcards.findAll()
+      res.send( artistcards );
+  } catch (err) {
+      next(err);
+  }
+});
 
 
 const port = 5000;

@@ -42,5 +42,9 @@ module.exports = class Comment extends Sequelize.Model {
             foreignKey: "feedNum",
             targetKey: "feedNum",
         });
+        db.Comment.belongsTo(db.ArtistCard, {
+            foreignKey: "artistName",
+            targetKey: "artistName",
+        });
     }
 };

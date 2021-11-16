@@ -46,7 +46,7 @@ const App = () => {
   
   if(!isLogin){
     return (
-        <div>
+        <>
           <AppBar1 isLogin={isLogin} />
           <Route  path="/login" isLogin={isLogin} component={Login} exact />
           <Route  path="/"  isLogin={isLogin}component={Main} exact />
@@ -59,7 +59,7 @@ const App = () => {
           <Route  path="/Signup" isLogin={isLogin} component={Signup} exact />
           
           
-      </div>
+      </>
     );
   }
 

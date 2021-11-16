@@ -5,36 +5,46 @@ const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 // const Admin = require("../models/admin");
 const User = require("../models/user");
 const nodemailer = require("nodemailer");
-const util = require('util')
+const multer = require('multer');
+const storage  = multer.diskStorage({
+    destination: (req,file,cb)=>{
+        cb(null, './')},
+    filename: function (req,file,cb) {
+        const ext = file.mimetype.split('/')[1];
+        cb(null,`uploads/${file.originalname}-${Date.now()}.${ext}`)
+    }
+})
+const upload = multer ({
+    storage: storage
+})
 
 const router = express.Router();
 
 //여기서부터 user
-router.post("/join", async (req, res, next) => {
-    const { userid,userpwd2, username, usertel, usermail, useraddr,useraddr2 } = req.body;
-
+router.post("/signup", async (req, res, next) => {
+    const { id,pw2,name, email,tel,addr,addr2} = req.body;
     try {
-        const exUser = await User.findOne({ where: { userId: userid } });
-        if (exUser) {
-            res.writeHead(302, { "Content-Type": "text/html; charset=utf8" });
-            res.write(`<script>alert('이미 가입된 ID입니다.')</script>`);
-            return res.write('<script>window.location="/join"</script>')
+        const isUserId = await User.findOne({ where: { userId: id } });
+        const isUserMail = await User.findOne({ where: { userMail: email } });
+
+        if (isUserId) {
+            console.log('가입된 id가 있습니다.')
+            return res.send("id존재")
+        } else if(isUserMail) {
+            console.log('가입된 email이 있습니다.')
+            return res.send("email존재");
+        } else{
+            const hash = await bcrypt.hash(pw2, 12);
+            await User.create({
+                userId: id,
+                userPwd: hash,
+                userName: name,
+                userMail: email,
+                userTel: tel,
+                userAddr: `${addr} ${addr2}`,
+            });
+            return res.send(true)
         }
-        // if (userid == "admin") {
-        //     res.writeHead(302, { "Content-Type": "text/html; charset=utf8" });
-        //     res.write(`<script>alert('이미 가입된 ID입니다.')</script>`);
-        //     return res.write('<script>window.location="/join"</script>')
-        // }
-        const hash = await bcrypt.hash(userpwd2, 12);
-        await User.create({
-            userId: userid,
-            userPwd: hash,
-            userName: username,
-            userMail: usermail,
-            userTel: usertel,
-            userAddr: `${useraddr} ${useraddr2}`,
-        });
-        return res.redirect("/join/complete");
     } catch (error) {
         console.error(error);
         return next(error);
@@ -85,24 +95,21 @@ router.get('/logintest', (req, res) => {
     res.send({data: 'data'})
 });
 router.post('/logintest', async(req, res) => {
-    //console.log(`= = = > req : ${util.inspect(req)}`)
     const inputId =req.body.id
     const inputPw =req.body.pw
+    const hash = await bcrypt.hash(inputPw, 12);
+    console.log(hash)
     console.log(inputId)
-    //const inputPwd =req.query.user_Pwd)
     const userInfo = await User.findOne({where:{userId : inputId}})
     console.log(userInfo)
-    if(userInfo){
-        await User.findOne({where:{userId : inputId}})    .then((result) => {
-            res.send(result)
-        })
-        .catch( err => {
-            console.log(err)
-            throw err;
-        })
-        
+    const compare = await bcrypt.compare(inputPw,userInfo.userPwd)
+    console.log(compare)
+    if(compare=== true){
+        console.log('성공')
+        res.send(userInfo)
     } else{
-        res.send('아이디 또는 비밀번호가 일치하지 않습니다.')
+        console.log('실패')
+        res.send(false)
     }
 
 
