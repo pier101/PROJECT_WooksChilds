@@ -71,7 +71,7 @@ const a = await User.findAll({where:{ userId: id }})
 
     //비밀번호 까지 맞다면 토큰을 생성하기.
     user.generateToken((err, user) => {
-        if (err) return res.status(400).send(err);
+        if (err) return res.status(400).send(err);  
 
         // 토큰을 저장한다.  어디에 ?  쿠키 , 로컳스토리지 
         res.cookie("x_auth", user.token)
@@ -101,6 +101,29 @@ router.post('/logintest', async(req, res) => {
     console.log(hash)
     console.log(inputId)
     const userInfo = await User.findOne({where:{userId : inputId}})
+    console.log(userInfo)
+    const compare = await bcrypt.compare(inputPw,userInfo.userPwd)
+    console.log(compare)
+    if(compare=== true){
+        console.log('성공')
+        res.send(userInfo)
+    } else{
+        console.log('실패')
+        res.send(false)
+    }
+
+
+});
+router.post('/logintest', async(req, res) => {
+    const inputId =req.body.id
+    const inputPw =req.body.pw
+    // const hash = await bcrypt.hash(inputPw, 12);
+    // console.log(hash)
+    // console.log(inputId)
+    const userInfo = await User.findOne({where:{userId : inputId}})
+
+    res.send(userInfo)
+
     console.log(userInfo)
     const compare = await bcrypt.compare(inputPw,userInfo.userPwd)
     console.log(compare)

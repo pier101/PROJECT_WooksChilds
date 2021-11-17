@@ -34,10 +34,10 @@ module.exports = class User extends Sequelize.Model {
                     allowNull: false,
                     defaultValue : "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
                 },
-                level: {
-                    type: Sequelize.INTEGER,
-                    allowNull: true,
-                    defaultValue: 1,
+                role: {
+                    type: Sequelize.STRING(100),
+                    allowNull: false,
+                    defaultValue: "user",
                 },
                 // userCreated: {
                 //     type: Sequelize.DATE,

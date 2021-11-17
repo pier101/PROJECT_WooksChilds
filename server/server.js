@@ -4,6 +4,7 @@ const cors = require("cors");
 const pageRouter = require("./router/page.js");
 const artistRouter = require('./router/artist')
 const authRouter = require('./router/auth')
+const adminRouter = require('./router/admin')
 const Artistcards = require('./models/artistcard')
 
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use("/", pageRouter);
 app.use('/artist', artistRouter)
 app.use('/auth', authRouter)
+app.use('/admin', adminRouter)
 
 
 
@@ -37,6 +39,7 @@ app.get('/artistCard', async (req, res, next) => {
       next(err);
   }
 });
+
 //////////////////////////////////////////네이버 검색 api
 var client_id = 'WBUTkxSJHkAOIVSM0i78';
 var client_secret = 'tS6kxuYMb1';

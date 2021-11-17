@@ -41,6 +41,10 @@ module.exports = class Goods extends Sequelize.Model {
             foreignKey: "artistId",
             targetKey: "artistId",
         });
+        db.Goods.belongsTo(db.ArtistCard, {
+            foreignKey: "artistName",
+            targetKey: "artistName",
+        });
         db.Goods.hasMany(db.OrderGoods, {
             foreignKey: "goodsNum",
             sourceKey: "goodsNum",

@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from 'react';
 import {Box,TextField} from '@mui/material';
-import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Masonry from '@mui/lab/Masonry';
 import axios from 'axios'
@@ -8,14 +7,14 @@ import axios from 'axios'
 
 
 export default function News() { 
-  const [search,setSeach] = useState('블랙핑크');   
-  const [Delay,setDelay] = useState('');   
+  const [search,setSeach] = useState('');   
+  const [Delay,setDelay] = useState('블랙핑크');   
   const  [img,setImg] = useState([]);
   const handleSubmit = () => {setDelay(search) }
   
   //검색
   useEffect(()=>{  
-    axios.get(`http://localhost:5000/search?query=${search} `)
+    axios.get(`http://localhost:5000/search?query=${Delay} `)
         .then( (res)=>{setImg(res.data.items)})
   },[Delay])
 

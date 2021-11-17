@@ -47,5 +47,10 @@ module.exports = class ArtistCard extends Sequelize.Model {
             sourceKey: "artistName",
         });
 
+        db.ArtistCard.hasMany(db.Goods, {
+            foreignKey: "artistName",
+            sourceKey: "artistName",
+        });
+
     }
 };

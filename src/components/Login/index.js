@@ -9,10 +9,8 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import axios from 'axios'
-import { Redirect } from "react-router";
-import { useDispatch } from 'react-redux';
+
 //import { loginUser } from '../../modules/user';
-import { withRouter } from 'react-router-dom';
 //import Login from "./";
 
 const Login = (props) => {
@@ -41,28 +39,27 @@ const Login = (props) => {
 
   const onClickLogin = ()=>{
     console.log('로그인 버튼 클릭');
+
     const login =async ()=> {
       await axios.post('http://localhost:5000/auth/logintest',{id:idValue, pw: pwValue })
     .then(res =>{
-      console.log(res.data.userId)
-     if(res.data.userId === idValue && res.data.userPwd === pwValue) {
-        console.log('======================','로그인 성공')
-        sessionStorage.setItem('user_id', idValue)
-        document.location.href = '/'
+      console.log(res.data)
+    if(res.data===false) {
+      alert('아이디 또는 비밀번호가 일치하지 않습니다.')
     } else {
       console.log('========',res.data.msg)
-      alert('아이디 또는 비밀번호가 일치하지 않습니다.')
+      sessionStorage.setItem('user_id', idValue)
+      console.log('======================','로그인 성공')
+      document.location.href = '/'
   }
-  
-   
-    })}
+  })}
     login()
   }
 
-  useEffect(()=>{
-    axios.get('/auth/logintest').then(res=>console.log(res.data)).catch()
-    console.log(sessionStorage)
-  },[])
+  // useEffect(()=>{
+  //   // axios.get('/auth/logintest').then(res=>console.log(res.data)).catch()
+  //   console.log(sessionStorage)
+  // },[])
 
   // 로그인창
   return (
@@ -70,7 +67,7 @@ const Login = (props) => {
       <Paper elevation={10} style={paperStyle}>
         <Grid align="center">
           <Avatar style={avatarStyle}>
-            <LockIcon />
+            <LockIcon></LockIcon>
           </Avatar>
           <br></br>
           <h2>로그인</h2>
