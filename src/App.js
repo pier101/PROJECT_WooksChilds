@@ -12,6 +12,7 @@ import Profile from "./components/profile/Profile"
 import GoodsInfo from "./components/shop/GoodsInfo";
 import Payment from "./components/shop/Payment"
 import Signup from "./components/Login/Signup";
+import UserInfo from "./components/profile/Userinfo";
 
 
 
@@ -57,7 +58,7 @@ const App = () => {
           <Route path="/GoodsInfo" component={GoodsInfo} exact/> 
           <Route path="/Payment" component={Payment} exact/> 
           <Route  path="/Signup" isLogin={isLogin} component={Signup} exact />
-          
+          <Route path='/Userinfo' component={UserInfo} exact />
           
       </>
     );
