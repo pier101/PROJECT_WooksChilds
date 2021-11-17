@@ -13,7 +13,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
 export default function Shop() {
     return (
-        <div>
+        <>
            
                 <Box sx={{}}>
                     <Box sx={{ pt:'8%', pb:'5%',fontWeight: 'bold',textAlign: 'center',color:'#06e19a',fontSize:100, }}>GOOODS SHOP</Box>
@@ -148,6 +148,6 @@ export default function Shop() {
                         </Box>
                     </Box>
                 </Box>
-        </div>
+        </>
     )
 }

@@ -12,12 +12,8 @@ export default function Artists() {
     const  [artistCard,setArtistCard] = useState([]);
     //로딩시 카드불러올꺼임
     useEffect(()=>{  
-       
-             axios.get(`http://localhost:5000/artistCard`) //package.json 밑에 (proxy:주소) 넣어주면 경로에 서버주소 안 넣어도 됨
-            .then( (res)=>{setArtistCard(res.data)
-            console.log(res.data)
-          })
-          
+             axios.get(`http://localhost:5000/artistCard`)
+            .then( (res)=>{setArtistCard(res.data)})
         },[])
 
 
