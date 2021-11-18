@@ -42,15 +42,12 @@ app.get('/artistCard', async (req, res, next) => {
 });
 //////////shop 페이지 구즈카드
 app.get('/goodsCard', async (req, res, next) => {
-  const goodsCard= await Goods.findAll(
-    { include: [ {
-      model:Artistcards,
-     
-    },
-     ], }
-      )
-  console.log(goodsCard)
   try {
+  const goodsCard= await Goods.findAll(
+    { include: {model: Artistcards}
+  })
+  console.log(goodsCard)
+  
     res.send( goodsCard);
   } catch (err) {
       next(err);

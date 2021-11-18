@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {Box,Avatar,Checkbox} from '@mui/material';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
@@ -6,12 +6,21 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {Carousel} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
-
+import axios from 'axios'
 
 import { pink } from '@mui/material/colors';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
 export default function Shop() {
+
+
+    const  [goodsCard,setGoodsCard] = useState([]);
+    //로딩시 카드불러올꺼임
+    useEffect(()=>{  
+             axios.get(`http://localhost:5000/goodsCard`)
+            .then( (res)=>{setGoodsCard(res.data)})
+        },[])
+        
     return (
         <>
            
@@ -68,84 +77,23 @@ export default function Shop() {
                     <Box sx={{ pt:'10%',fontWeight: 'bold',textAlign: 'center',color:'#06e19a',fontSize:70, }}>구경 가자가자 가자고!</Box>
                     <Box sx={{ mt:5, mx:'15%', fontWeight: 'bold',textAlign: 'center',display: 'flex',  flexWrap: 'wrap',justifyContent: 'center', }}>
 
-                        <Box>
+                    {goodsCard.map((a,i)=>{ return(
+                        <Box key={i}>
                             <Link to='/goodsInfo'className='nav-link'>
                             <Avatar
                             alt="Remy Sharp"
                             variant="square"
-                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
+                            src={a.ArtistCard.artistCardImg}
                             sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
                             /></Link>
-                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
+                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>{a.goodsName}
                                 <Checkbox {...label} 
                                     sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
                             </Box>
                         </Box>
-                        <Box>
-                            <Link to='/goodsInfo'className='nav-link'>
-                            <Avatar
-                            alt="Remy Sharp"
-                            variant="square"
-                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
-                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
-                            /></Link>
-                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
-                                <Checkbox {...label} 
-                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
-                            </Box>
-                        </Box>
-                        <Box>
-                            <Link to='/goodsInfo'className='nav-link'>
-                            <Avatar
-                            alt="Remy Sharp"
-                            variant="square"
-                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
-                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
-                            /></Link>
-                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
-                                <Checkbox {...label} 
-                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
-                            </Box>
-                        </Box>
-                        <Box>
-                            <Link to='/goodsInfo'className='nav-link'>
-                            <Avatar
-                            alt="Remy Sharp"
-                            variant="square"
-                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
-                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
-                            /></Link>
-                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
-                                <Checkbox {...label} 
-                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
-                            </Box>
-                        </Box>
-                        <Box>
-                            <Link to='/goodsInfo'className='nav-link'>
-                            <Avatar
-                            alt="Remy Sharp"
-                            variant="square"
-                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
-                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
-                            /></Link>
-                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
-                                <Checkbox {...label} 
-                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
-                            </Box>
-                        </Box>
-                        <Box>
-                            <Link to='/goodsInfo'className='nav-link'>
-                            <Avatar
-                            alt="Remy Sharp"
-                            variant="square"
-                            src={'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png'}
-                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
-                            /></Link>
-                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>선미
-                                <Checkbox {...label} 
-                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
-                            </Box>
-                        </Box>
+                    )})} 
+                      
+                        
                     </Box>
                 </Box>
         </>
