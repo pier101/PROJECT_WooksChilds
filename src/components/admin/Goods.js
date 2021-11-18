@@ -22,10 +22,13 @@ const  [artistCard,setArtistCard] = useState([]);
 
     const Change = (e) => {
         Content[e.target.name] = e.target.value;
+        console.log(Content)
         }
 
     const Submit = async(e) => {
         e.preventDefault();
+        
+        if(Content.goodsName.length<7){
         const res = await axios.post(`http://localhost:5000/admin/goods`,{Content});
         const check = res.data.data
             if(check===true) {
@@ -37,6 +40,10 @@ const  [artistCard,setArtistCard] = useState([]);
                 alert(`정상등록되었다!`);
 
             }
+        }else{
+            alert(`굿즈이름 6글자이내로 작성하세요`);
+
+        }
     }    
    
 
@@ -47,7 +54,9 @@ const  [artistCard,setArtistCard] = useState([]);
             <Box sx={{ mx:'5%', mt:10, width:'50%',textAlign: 'center', }}> 
             <form onChange={Change}>
                 <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>굿즈이름</Box>
-                <TextField type='text'  name="goodsName"  fullWidth   />
+                <TextField fullWidth name="goodsName">
+                <input maxlength='6'name="goodsName"  placeholder="6글자이내" />
+                </TextField>
                 <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>가격</Box>
                 <TextField type='number'  name="goodsPrice"  fullWidth  /> 
                 <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>굿즈 설명</Box>

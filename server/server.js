@@ -5,7 +5,8 @@ const pageRouter = require("./router/page.js");
 const artistRouter = require('./router/artist')
 const authRouter = require('./router/auth')
 const adminRouter = require('./router/admin')
-const Artistcards = require('./models/artistcard')
+const Artistcards = require('./models/artistcard');
+const Goods = require("./models/goods");
 
 
 
@@ -39,6 +40,23 @@ app.get('/artistCard', async (req, res, next) => {
       next(err);
   }
 });
+//////////shop 페이지 구즈카드
+app.get('/goodsCard', async (req, res, next) => {
+  const goodsCard= await Goods.findAll(
+    { include: [ {
+      model:Artistcards,
+     
+    },
+     ], }
+      )
+  console.log(goodsCard)
+  try {
+    res.send( goodsCard);
+  } catch (err) {
+      next(err);
+  }
+});
+
 
 //////////////////////////////////////////네이버 검색 api
 var client_id = 'WBUTkxSJHkAOIVSM0i78';
