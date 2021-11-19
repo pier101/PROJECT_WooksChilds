@@ -54,12 +54,10 @@ const  [artistCard,setArtistCard] = useState([]);
             <Box sx={{ mx:'5%', mt:10, width:'50%',textAlign: 'center', }}> 
             <form onChange={Change}>
                 <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>굿즈이름</Box>
-                <TextField fullWidth name="goodsName">
-                <input maxlength='6'name="goodsName"  placeholder="6글자이내" />
-                </TextField>
+                <TextField fullWidth name="goodsName" placeholder="6글자이내" />
                 <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>가격</Box>
                 <TextField type='number'  name="goodsPrice"  fullWidth  /> 
-                <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>굿즈 설명</Box>
+                <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>굿즈 할인 밑 설명</Box>
                 <TextField type='text'  name="goodsContent"  fullWidth  /> 
                 <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>아티스트 고르셈</Box>
                 <Box sx={{ minWidth: 120 }}>

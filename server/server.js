@@ -7,6 +7,7 @@ const authRouter = require('./router/auth')
 const adminRouter = require('./router/admin')
 const Artistcards = require('./models/artistcard');
 const Goods = require("./models/goods");
+const OrderGoods = require("./models/orderGoods");
 
 
 
@@ -46,7 +47,6 @@ app.get('/goodsCard', async (req, res, next) => {
   const goodsCard= await Goods.findAll(
     { include: {model: Artistcards}
   })
-  console.log(goodsCard)
   
     res.send( goodsCard);
   } catch (err) {
@@ -54,6 +54,33 @@ app.get('/goodsCard', async (req, res, next) => {
   }
 });
 
+/////오더굿즈
+app.post("/goodsOder",async (req, res) => {
+  
+  const {buy_count,
+        goods_color,
+        goods_size,
+        buyer_hp,
+        buyer_address,
+        buyer_email,
+        goodsNum,
+        userId} = req.body.content;
+  try {
+      await OrderGoods.create({
+        orderQty:buy_count,
+        goods_color,
+        goods_size,
+        buyer_hp,
+        buyer_address,
+        buyer_email,
+        goodsNum,
+        userId,
+      });
+      return res.send({ data:'성공' });
+  } catch (err) {
+      console.error(err);
+  }
+});
 
 //////////////////////////////////////////네이버 검색 api
 var client_id = 'WBUTkxSJHkAOIVSM0i78';
