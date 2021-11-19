@@ -10,13 +10,33 @@ module.exports = class OrderGoods extends Sequelize.Model {
                     allowNull: false,
                     autoIncrement: true,
                 },
-                orderQty: {
+                orderQty: { //수량
                     type: Sequelize.INTEGER(45),
-                    allowNull: false,
+                    allowNull: true,
+                },
+                goods_color: {   
+                    type: Sequelize.STRING(45),
+                    allowNull: true,
+                },
+                goods_size: {
+                    type: Sequelize.STRING(45),
+                    allowNull: true,
+                },
+                buyer_hp: {     //배송지 핸드폰
+                    type: Sequelize.STRING(45),
+                    allowNull: true,
+                },
+                buyer_address: {    //배송지 주소
+                    type: Sequelize.STRING(45),
+                    allowNull: true,
+                },
+                buyer_email: {    //배송 확인 이메일
+                    type: Sequelize.STRING(45),
+                    allowNull: true,
                 },
                 orderCreated: {
                     type: Sequelize.DATE,
-                    allowNull: false,
+                    allowNull: true,
                     defaultValue: Sequelize.NOW,
                 },
                 //foriegn key로 못 받아오면 추가 db생성하기

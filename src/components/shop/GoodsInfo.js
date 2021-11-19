@@ -9,10 +9,12 @@ import { Link } from 'react-router-dom';
 
 
 ///////////////////결제 컴포넌트
-import {useHistory} from "react-router";
+import {useHistory,useLocation} from "react-router";
 import $ from "jquery";
 
- function GoodsInfo() {
+function GoodsInfo() {
+    const location = useLocation();
+    const content = location.state.content !== null || undefined ? location.state.content : null;
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
     const [selecColor, setselecColor] = useState('black');//라디오버튼칼라
     const [size, setsize] = useState('90');//라디오버튼 사이즈
@@ -42,39 +44,10 @@ import $ from "jquery";
     const [수량,set수량] = useState(1)
 
     
-    const [상품,set상품] = useState({
-        얼굴:'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png',
-        가격:'30000',
-        이름:'frontME(선미라는뜻)'
-    },)
-    const 총가격= 상품.가격*수량;
-//////////////////////////////////////////////////////////////////////////////////결제 넘기기
-const history = useHistory();
-const [content] = useState({
-    // Default form set
-    is_direct: 'N',                               // 결제창 방식 (DIRECT: Y | POPUP: N)
-    pay_type: 'transfer',                         // 결제수단
-    work_type: 'CERT',                            // 결제요청방식
-    card_ver: '',                                  // DEFAULT: 01 (01: 정기결제 플렛폼, 02: 일반결제 플렛폼), 카드결제 시 필수
-    payple_payer_id: '',                          // 결제자 고유ID (본인인증 된 결제회원 고유 KEY)
-    buyer_no: '2335',                             // 가맹점 회원 고유번호
-    buyer_name: '홍길동',                         // 결제자 이름
-    buyer_hp: '01012345678',                      // 결제자 휴대폰 번호
-    buyer_email: 'test@payple.kr',                // 결제자 Email
-    buy_goods: '휴대폰',                          // 결제 상품
-    buy_count: '',                                // 결제 상품 개수
-    buy_price: '1000',                            // 결제 금액
-    buy_total: '1000',                            // 결제 금액
-    buy_istax: 'Y',                               // 과세여부 (과세: Y | 비과세(면세): N)
-    buy_taxtotal: '',                             // 부가세(복합과세인 경우 필수)
-    order_num: createOid(),                       // 주문번호
-    pay_year: '',                                 // [정기결제] 결제 구분 년도
-    pay_month: '',                                // [정기결제] 결제 구분 월
-    is_reguler: 'N',                              // 정기결제 여부 (Y | N)
-    is_taxsave: 'N',                              // 현금영수증 발행여부
-    simple_flag: 'N',                             // 간편결제 여부
-    auth_type: 'sms'                              // [간편결제/정기결제] 본인인증 방식 (sms : 문자인증 | pwd : 패스워드 인증)
-});
+   
+    const 총가격= content.buy_price *수량;
+    const history = useHistory();
+
 
 const handleChange = (e) => {
     content[e.target.name] = e.target.value;
@@ -84,8 +57,9 @@ const handleSubmit = (e) => {  //버틑눌러서
     e.preventDefault();
     content.buy_total = 총가격
     content.buy_count = 수량
-    content.buy_goods = 상품.이름
-    content.buy_price = 상품.가격
+    content.goods_color = selecColor
+    content.goods_size = size
+  
     // content.buyer_name =  사용자이름
     // content.buyer_hp= 사용자 핸드폰
     // content.buyer_email =사용자 이메일
@@ -116,7 +90,7 @@ const handleSubmit = (e) => {  //버틑눌러서
                                  <Avatar
                                     
                                     alt="Remy Sharp"
-                                    src={상품.얼굴}
+                                    src={content.goods_img}
                                     variant="rounded"
                                     sx={{ position :'absolute',top:'25%',left:'25%', width: '45%', height: "60%", display: 'center', }}                                    />
 
@@ -137,7 +111,7 @@ const handleSubmit = (e) => {  //버틑눌러서
                                  <Avatar
                                     
                                     alt="Remy Sharp"
-                                    src={상품.얼굴}
+                                    src={content.goods_img}
                                     variant="rounded"
                                     sx={{ position :'absolute',top:'40%',left:'28%', width: '42%', height: "43%", display: 'center', }}                                    />
 
@@ -158,7 +132,7 @@ const handleSubmit = (e) => {  //버틑눌러서
                                  <Avatar
                                     
                                     alt="Remy Sharp"
-                                    src={상품.얼굴}
+                                    src={content.goods_img}
                                     variant="rounded"
                                     sx={{ position :'absolute',top:'40%',left:'28%', width: '42%', height: "43%", display: 'center', }}  />
 
@@ -179,7 +153,7 @@ const handleSubmit = (e) => {  //버틑눌러서
                                  <Avatar
                                     
                                     alt="Remy Sharp"
-                                    src={상품.얼굴}
+                                    src={content.goods_img}
                                     variant="rounded"
                                     sx={{ position :'absolute',top:'45%',left:'33%', width: '28%', height: "30%", display: 'center', }}  />
 
@@ -198,11 +172,11 @@ const handleSubmit = (e) => {  //버틑눌러서
 
                     <Box sx={{ fontWeight: 'bold',textAlign: 'left',fontSize:30, width:'50%',}}>
                    
-                        <Box sx={{mt:2, fontWeight: 'bold',textAlign: 'left',fontSize:30, }}>{상품.이름}~!😂🤣풰키지 </Box>
+                        <Box sx={{mt:2, fontWeight: 'bold',textAlign: 'left',fontSize:30, }}>{content.buy_goods}~!😂🤣풰키지 </Box>
                         <Box sx={{ pl:2 ,fontWeight: 'light' ,textAlign: 'left',fontSize:10, }}>"마지막 남은 췐스췐스 4종 세트"</Box>
 
                         <Box sx={{ display:'flex',justifyContent: 'space-between',}}> 
-                            <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:25, }}>{상품.가격} 원</Box>
+                            <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:25, }}>{content.buy_price }원</Box>
                             <Box sx={{ pb:1, fontWeight: 'light' ,textAlign: 'left',fontSize:15, }}> 찜
                             <Checkbox {...label}sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
                            찜</Box>

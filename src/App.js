@@ -13,6 +13,7 @@ import Menu from "./components/artist/index";
 //-----------------------------------------------//
 import Payment from "./components/shop/Payment";
 import UserInfo from "./components/profile/Userinfo";
+import Admin from "./components/admin";
 import { Board } from "./page/index";
 import Searchpw from "./components/Login/Searchpw";
 
@@ -62,6 +63,7 @@ const App = ({match}) => {
           <Route path="/signup" component={Signup} exact/> 
           <Route path='/Userinfo' component={UserInfo} exact />
           <Route path='/Searchpw' component={Searchpw} exact />
+          <Route path='/Admin' component={Admin} exact />
           <Board />
       </>
     );

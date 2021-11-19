@@ -65,30 +65,30 @@ export default function AppBar1(props) {
       open={isMenuOpen} 
       onClose={handleMenuClose}
     >
-        <MenuItem onClick={handleMenuClose}><Link to='/profile'className='nav-link'>Profile</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link to='/profile'className='nav-link'>Profile</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
-  // const renderMenuX = (
-  //   <Menu
-  //     anchorEl={anchorEl}
-  //     anchorOrigin={{
-  //       vertical: 'top',
-  //       horizontal: 'right',
-  //     }}
-  //     id={menuId}
-  //     keepMounted
-  //     transformOrigin={{
-  //       vertical: 'top',
-  //       horizontal: 'right',
-  //     }}
-  //     open={isMenuOpen} 
-  //     onClose={handleMenuClose}
-  //   >
-  //     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-  //     <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-  //   </Menu>
-  // );
+  const renderMenuX = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen} 
+      onClose={handleMenuClose}
+    ><Link to='/goodsInfo'className='nav-link'>
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem></Link>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
@@ -139,7 +139,7 @@ export default function AppBar1(props) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <Link to='/Profile'className='nav-link'><p>Profile</p></Link>
       </MenuItem>
       <MenuItem className="login" isLogin={isLogin}>
         <IconButton
@@ -204,7 +204,7 @@ export default function AppBar1(props) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <Link to='/profile'className='nav-link'><p>Profile</p></Link> 
       </MenuItem>
       <MenuItem className="login" isLogin={isLogin}>
         <IconButton
@@ -272,7 +272,6 @@ const list = (anchor) => (
 
 
   return (
-    <>
     <Box sx={{ flexGrow: 1 , bgcolor: 'secondary.main' }}  >
       <AppBar position="fixed" sx={{ bgcolor: 'white' }}>
         <Toolbar>
@@ -280,7 +279,6 @@ const list = (anchor) => (
         {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>
-
           <IconButton
             size="large"
             edge="start"
@@ -301,7 +299,7 @@ const list = (anchor) => (
           </Drawer>
         </React.Fragment>
       ))}
-        
+        <Link to='/'className='nav-link'>
           <Typography
             variant="h6"
             noWrap
@@ -310,7 +308,7 @@ const list = (anchor) => (
           >
             Wooks Child
           </Typography>
-        
+        </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="default">
@@ -357,6 +355,5 @@ const list = (anchor) => (
       {renderMenu}
     
     </Box>
-    </>
   );
 }

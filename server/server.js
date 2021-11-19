@@ -5,9 +5,11 @@ const pageRouter = require("./router/page.js");
 const artistRouter = require('./router/artist')
 const authRouter = require('./router/auth')
 const mypageRouter = require('./router/mypage')
-const Artistcards = require('./models/artistcard')
 const boardRouter = require("./router/board");
-
+const adminRouter = require('./router/admin')
+const Artistcards = require('./models/artistcard')
+const Goods = require("./models/goods");
+const OrderGoods = require("./models/orderGoods");
 
 
 
@@ -33,6 +35,7 @@ app.use('/artist', artistRouter)
 app.use('/auth', authRouter)
 app.use("/mypage", mypageRouter)
 app.use("/board", boardRouter);
+app.use('/admin', adminRouter)
 
 
 
@@ -45,6 +48,46 @@ app.get('/artistCard', async (req, res, next) => {
       next(err);
   }
   });
+  //////////shop 페이지 구즈카드
+app.get('/goodsCard', async (req, res, next) => {
+  try {
+  const goodsCard= await Goods.findAll(
+    { include: {model: Artistcards}
+  })
+  
+    res.send( goodsCard);
+  } catch (err) {
+      next(err);
+  }
+});
+
+/////오더굿즈
+app.post("/goodsOder",async (req, res) => {
+  
+  const {buy_count,
+        goods_color,
+        goods_size,
+        buyer_hp,
+        buyer_address,
+        buyer_email,
+        goodsNum,
+        userId} = req.body.content;
+  try {
+      await OrderGoods.create({
+        orderQty:buy_count,
+        goods_color,
+        goods_size,
+        buyer_hp,
+        buyer_address,
+        buyer_email,
+        goodsNum,
+        userId,
+      });
+      return res.send({ data:'성공' });
+  } catch (err) {
+      console.error(err);
+  }
+});
   //////////////////////////////////////////네이버 검색 api
   var client_id = 'WBUTkxSJHkAOIVSM0i78';
   var client_secret = 'tS6kxuYMb1';

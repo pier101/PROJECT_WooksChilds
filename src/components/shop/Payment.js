@@ -1,7 +1,7 @@
 import React,{useState}from 'react'
-import {Box,Avatar,Checkbox,Divider,Button,TextField} from '@mui/material';
+import {Box,Avatar,Divider,Button,TextField} from '@mui/material';
 import Footer from '../main/Footer'
-
+import axios from 'axios';
 
 import DaumPostcode from "react-daum-postcode";
 
@@ -10,21 +10,17 @@ import {useLocation, useHistory} from "react-router";
 import {authenticate} from "./common/authenticate";
    
  function Payment() {
-
-  
     ////////////////결제
     window.onpopstate = (e) => {
         if (e) {
             window.MainBodyAction('close');
         }
     }
-
     const location = useLocation();
     const history = useHistory();
     const content = location.state.content !== null || undefined ? location.state.content : null;
 
     let [payResult] = useState({});
-
     /* 결과를 받고자 하는 callback 함수 (callback 함수를 설정할 경우 PCD_RST_URL 이 작동하지 않음)
      * ref: http://docs.payple.kr/faq/pay/callback
      */
@@ -38,6 +34,8 @@ import {authenticate} from "./common/authenticate";
                 state: {payResult: payResult},
             });
         } else {
+            /////////////////////////////////////////여기엑시오스해서 저장할꺼보내야도미
+            axios.post(`http://localhost:5000/goodsOder`,{content});
             history.push({
                 pathname: '/',
             });
@@ -54,9 +52,7 @@ import {authenticate} from "./common/authenticate";
     const handleClick = (e) => {
         e.preventDefault();
         const obj = {};
-        /*
-         *  공통 설정
-         */
+        
         obj.PCD_PAY_TYPE = content.pay_type;			             // (필수) 결제 방법 (transfer | card)
         obj.PCD_PAY_WORK = content.work_type;			             // (필수) 결제요청 업무구분 (AUTH : 본인인증+계좌등록, CERT: 본인인증+계좌등록+결제요청등록(최종 결제승인요청 필요), PAY: 본인인증+계좌등록+결제완료)
         obj.PCD_CARD_VER = content.card_ver || '01';			     // DEFAULT: 01 (01: 정기결제 플렛폼, 02: 일반결제 플렛폼), 카드결제 시 필수
@@ -149,29 +145,21 @@ import {authenticate} from "./common/authenticate";
     ///////////////////////////////////////////////////////////결제라인 이벤트 끝
 
 
-    const [name, setname] = useState('');     //배송지 이름입력
-    const nameChange = (event) => {
-        setname(event.target.value); }
-    const [phoen, setphoen] = useState('');     //핸드폰 이름입력
-    const phoenChange = (event) => {
-        setphoen(event.target.value); }
+
     
 
     const[fullAddress,setfullAddress] =useState ('');
     let [daumPost, setDaumPost] = useState(false);
-    
 
-
-  
-    let [수량,set수량] = useState(1)
-
-    
-    let[상품,set상품] = useState({
-        얼굴:'https://cdn-contents.weverse.io/admin/xlx2048/png/f59ff76e6908409ea9bb7e4f162c7615633.png',
-        가격:30000,
-        이름:'frontME(선미라는뜻)'
-    },)
-    let 총가격= 상품.가격*수량;
+    const nameChange = (event) => {
+        content.buyer_name = event.target.value }
+    const phoenChange = (event) => {
+        content.buyer_hp = event.target.value }
+    const addresChange = (event) => {
+        setfullAddress(event.target.value)
+        content.buyer_address = fullAddress}
+    const  emailChange = (event) => {
+        content.buyer_email = event.target.value}
     return (
         <div>
         <Box sx={{mt:10, mx:'10%',display:'flex',}}>
@@ -188,7 +176,7 @@ import {authenticate} from "./common/authenticate";
                        <Box sx={{ display:'flex',justifyContent: 'space-between',}}> 
                             <Avatar
                                     alt="Remy Sharp"
-                                    src={상품.얼굴}
+                                    src={content.goods_img}
                                     variant="rounded"
                                     sx={{  width: 150    , height: 150    , textAlign: 'center', }} />
                             <Box sx={{textAlign:'', }}> 
@@ -236,12 +224,12 @@ import {authenticate} from "./common/authenticate";
 
                    <Box sx={{ mt:5,}}> 
                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>이름</Box>
-                       <TextField  onChange={nameChange} margin="dense" value={name}  fullWidth id="fullWidth" placeholder="이름을 입력하세유" />
+                       <TextField   margin="dense"   fullWidth id="fullWidth" placeholder="이름을 입력하세유" />
                    </Box>
 
                    <Box sx={{ mt:5,}}> 
                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>연락처</Box>
-                       <TextField  onChange={phoenChange} margin="dense"  value={phoen} fullWidth id="fullWidth" placeholder="-없이 010000000입력하셈" />
+                       <TextField   margin="dense" fullWidth id="fullWidth" placeholder="-없이 010000000입력하셈" />
                    </Box>
 
                    <Divider sx={{m:7,mx:0}}/>  
@@ -250,12 +238,17 @@ import {authenticate} from "./common/authenticate";
 
                    <Box sx={{ mt:5,}}> 
                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>수령인</Box>
-                       <TextField  onChange={nameChange} margin="dense" value={name}  fullWidth id="fullWidth" placeholder="이름을 입력하세유" />
+                       <TextField  onChange={nameChange} margin="dense"  fullWidth id="fullWidth" placeholder="이름을 입력하세유" />
                    </Box>
 
                    <Box sx={{ mt:5,}}> 
                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>연락처</Box>
-                       <TextField  onChange={phoenChange} margin="dense"  value={phoen} fullWidth id="fullWidth" placeholder="-없이 입력하셈" />
+                       <TextField  onChange={phoenChange} margin="dense"  fullWidth id="fullWidth" placeholder="-없이 입력하셈" />
+                   </Box>
+
+                   <Box sx={{ mt:5,}}> 
+                       <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>이메일</Box>
+                       <TextField  onChange={emailChange} margin="dense"  fullWidth id="fullWidth" placeholder="-없이 입력하셈" />
                    </Box>
 
                    <Box sx={{ mt:5}}> 
@@ -271,7 +264,7 @@ import {authenticate} from "./common/authenticate";
                                 ? <DaumPost fullAddress={fullAddress} setfullAddress={setfullAddress} />
                                 : null
                             }
-                       <TextField type='text'  margin="dense" value={fullAddress} fullWidth id="fullWidth" placeholder="주소입력하셈" />
+                       <TextField type='text' onChange={addresChange} value={fullAddress} margin="dense"  fullWidth id="fullWidth" placeholder="주소입력하셈" />
 
                   
                     </Box>
