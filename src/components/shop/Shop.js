@@ -20,7 +20,6 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
              axios.get(`http://localhost:5000/goodsCard`)
             .then( (res)=>{setGoodsCard(res.data)})
         },[])
-        console.log(goodsCard)
 
     //////////////////////////////리덕스 안쓰고 페이지 넘길래
     const history = useHistory();
@@ -58,13 +57,12 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
    
 
     const Submit = (e) => {
-    
     content.buy_total = e.goodsPrice
     content.buy_goods = e.goodsName
     content.buy_price = e.goodsPrice
     content.goods_img = e.ArtistCard.artistCardImg
     content.goodsNum = e.goodsNum
-    content.userId = 'soon12'
+    content.userId = sessionStorage.user_id
         
       history.push({
         pathname: '/GoodsInfo',

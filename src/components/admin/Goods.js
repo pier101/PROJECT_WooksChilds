@@ -10,7 +10,6 @@ const  [artistCard,setArtistCard] = useState([]);
              axios.get(`http://localhost:5000/artistCard`)
             .then( (res)=>{setArtistCard(res.data)})
         },[])
-        console.log(artistCard)
 ////////////////////////////////////////////
 
     const [Content] = useState({
@@ -22,7 +21,6 @@ const  [artistCard,setArtistCard] = useState([]);
 
     const Change = (e) => {
         Content[e.target.name] = e.target.value;
-        console.log(Content)
         }
 
     const Submit = async(e) => {
@@ -51,7 +49,7 @@ const  [artistCard,setArtistCard] = useState([]);
 
         <>
         <Paper sx={{mx:'10%'}}>
-            <Box sx={{ mx:'5%', mt:10, width:'50%',textAlign: 'center', }}> 
+            <Box sx={{ mx:'5%', m:1, textAlign: 'center', }}> 
             <form onChange={Change}>
                 <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>굿즈이름</Box>
                 <TextField fullWidth name="goodsName" placeholder="6글자이내" />

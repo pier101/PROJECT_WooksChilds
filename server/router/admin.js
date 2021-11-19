@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ArtistCard = require("../models/artistcard");
 const Goods = require("../models/goods");
+const OrderGoods = require("../models/orderGoods");
 
 router.post("/atistcard",async (req, res) => {
     const {artistName, artistCardImg } = req.body.cardContent;
@@ -39,7 +40,18 @@ router.post("/goods",async (req, res) => {
         console.error(err);
     }
   });
-
+  ///////배송지 불러오기
+  router.get('/goodsCard', async (req, res, next) => {
+    try {
+    const goodsCard= await OrderGoods.findAll(
+      { include: {model: Goods}}
+      )
+    
+      res.send( goodsCard);
+    } catch (err) {
+        next(err);
+    }
+  });
 
 
 module.exports = router;

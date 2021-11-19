@@ -39,6 +39,8 @@ const App = ({match}) => {
         <Route path="/mypage/:id" component={Profile} exact/> 
         <Route path="/Shop" component={Shop} exact/> 
         <Route path="/GoodsInfo" component={GoodsInfo} exact/> 
+        <Route path='/Payment' component={Payment} exact /> 
+        <Route path='/Admin' component={Admin} exact />
       </>
     );
   } 

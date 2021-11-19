@@ -30,7 +30,7 @@ export default function Card() {
     return (
         <div>
             <Paper sx={{mx:'10%'}}>
-                    <Box sx={{ mx:'5%', mt:10, width:'50%',textAlign: 'center', }}> 
+                    <Box sx={{ mx:'5%', m:1, textAlign: 'center', }}> 
                     <form onChange={cardChange}>
                         <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>Atist : name</Box>
                         <TextField type='text' name="artistName"  fullWidth   />

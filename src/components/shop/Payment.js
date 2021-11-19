@@ -1,4 +1,4 @@
-import React,{useState}from 'react'
+import React,{useState,useEffect}from 'react'
 import {Box,Avatar,Divider,Button,TextField} from '@mui/material';
 import Footer from '../main/Footer'
 import axios from 'axios';
@@ -10,6 +10,17 @@ import {useLocation, useHistory} from "react-router";
 import {authenticate} from "./common/authenticate";
    
  function Payment() {
+    const[post,setPost]=useState({
+        name:'',
+        phoen:'',
+        email:'',
+        address:'',
+    })
+    const [user, setUser] = useState([])
+    useEffect(()=>{  
+        axios.get(`http://localhost:5000/mypage/${sessionStorage.user_id}`)
+       .then( (res)=>{setUser(res.data)})
+   },[post])
     ////////////////결제
     window.onpopstate = (e) => {
         if (e) {
@@ -144,10 +155,6 @@ import {authenticate} from "./common/authenticate";
     }
     ///////////////////////////////////////////////////////////결제라인 이벤트 끝
 
-
-
-    
-
     const[fullAddress,setfullAddress] =useState ('');
     let [daumPost, setDaumPost] = useState(false);
 
@@ -160,6 +167,23 @@ import {authenticate} from "./common/authenticate";
         content.buyer_address = fullAddress}
     const  emailChange = (event) => {
         content.buyer_email = event.target.value}
+    
+    
+
+    const changeValue = ()=>{
+        setPost({ 
+            name: user.userName,
+            phoen: user.userTel,
+            email: user.userMail,
+            address: user.userAddr,
+        })
+        content.buyer_email = user.userMail
+        content.buyer_name = user.userName
+        content.buyer_hp = user.userTel
+        content.buyer_address =  user.userAddr
+        setfullAddress(user.userAddr)
+    }
+
     return (
         <div>
         <Box sx={{mt:10, mx:'10%',display:'flex',}}>
@@ -220,35 +244,47 @@ import {authenticate} from "./common/authenticate";
            
                <Box sx={{ fontWeight: 'bold',textAlign: 'left',fontSize:30, width:'65%',}}>  
                {/* 필수 정보 */}
-                   <Box sx={{mt:2, fontWeight: 'bold',textAlign: 'left',fontSize:30, }}>주문자 정보 </Box>
+                   <Box sx={{mt:2, fontWeight: 'bold',textAlign: 'left',fontSize:30, }}>유저 정보 </Box>
 
-                   <Box sx={{ mt:5,}}> 
+                   <Box sx={{ mt:3,}}> 
                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>이름</Box>
-                       <TextField   margin="dense"   fullWidth id="fullWidth" placeholder="이름을 입력하세유" />
+                       <TextField   margin="dense"   fullWidth id="fullWidth" value={user.userName} />
                    </Box>
 
-                   <Box sx={{ mt:5,}}> 
+                   <Box sx={{ mt:3,}}> 
                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>연락처</Box>
-                       <TextField   margin="dense" fullWidth id="fullWidth" placeholder="-없이 010000000입력하셈" />
+                       <TextField   margin="dense" fullWidth id="fullWidth" value={user.userTel} />
+                   </Box>
+                   <Box sx={{ mt:3,}}> 
+                       <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>이메일</Box>
+                       <TextField   margin="dense" fullWidth id="fullWidth" value={user.userMail} />
+                   </Box>
+                   <Box sx={{ mt:3,}}> 
+                       <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>주소</Box>
+                       <TextField   margin="dense" fullWidth id="fullWidth" value={user.userAddr} />
                    </Box>
 
                    <Divider sx={{m:7,mx:0}}/>  
                 {/* 부가정보 */}
-                   <Box sx={{mt:2, fontWeight: 'bold',textAlign: 'left',fontSize:30, }}>배송지 정보 </Box>
+                    <Box sx={{display:'flex',justifyContent: 'space-between', }}>
+                            <Box sx={{mt:2, fontWeight: 'bold',textAlign: 'left',fontSize:30, }}>배송지 정보 </Box>
+                            <Button  onClick={changeValue} sx={{width:"15%",  bgcolor:'black',color:"white", fontWeight: 'bold',fontSize:20,}}>유저와 같음</Button>
+                            
+                    </Box>
 
                    <Box sx={{ mt:5,}}> 
                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>수령인</Box>
-                       <TextField  onChange={nameChange} margin="dense"  fullWidth id="fullWidth" placeholder="이름을 입력하세유" />
+                       <TextField  onChange={nameChange} margin="dense"  fullWidth id="fullWidth" placeholder="이름을 입력하세유" value={post.name} />
                    </Box>
 
                    <Box sx={{ mt:5,}}> 
                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>연락처</Box>
-                       <TextField  onChange={phoenChange} margin="dense"  fullWidth id="fullWidth" placeholder="-없이 입력하셈" />
+                       <TextField  onChange={phoenChange} margin="dense"  fullWidth id="fullWidth" placeholder="-없이 입력하셈" value={post.phoen} />
                    </Box>
 
                    <Box sx={{ mt:5,}}> 
                        <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:20, }}>이메일</Box>
-                       <TextField  onChange={emailChange} margin="dense"  fullWidth id="fullWidth" placeholder="-없이 입력하셈" />
+                       <TextField  onChange={emailChange} margin="dense"  fullWidth id="fullWidth" placeholder="-없이 입력하셈" value={post.email} />
                    </Box>
 
                    <Box sx={{ mt:5}}> 
@@ -281,23 +317,8 @@ import {authenticate} from "./common/authenticate";
                             <Box sx={{ textAlign: 'left',fontSize:15, }}>주문 폭주, 재고 부족으로 인한 발송 지연 시에는 별도 안내드립니다. 공휴일과 주말 주문 건은 배송사 휴무로 인해 월요일부터 적용됩니다. 연휴 기간 택배사 휴무, 천재지변 등으로 발송 지연 시 공지로 안내드립니다.</Box>
                         </Box> */}
 
-                 
-
-                
-
-
-
                    {/* 결제 */}
-                 
-
-                   
-
-
-
                    <Divider sx={{m:2,mx:0}}/>  
-                       
-
-                   
                    <Button onClick={handleClick} outlined="contained" color="inherit"sx={{mt:1, width:'100%',bgcolor:'black',color:"white", fontWeight: 'bold',fontSize:20,textAlign: 'center'}}>결 제 하 기</Button>
                    {/* /////////////////////////////////////////////결제끝 상품 설명 */}
 

@@ -11,7 +11,6 @@ import Vedios from './Vedios'
 //import Artist from './components/artist'
 const index = (props) => {
   const isLogin = props.isLogin
-  
     return (
         <div>
           <Thumbnail/>
