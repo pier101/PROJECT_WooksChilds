@@ -17,7 +17,6 @@ const index = (props) => {
           <Goods />
           <News />
           <Vedios />
-
           <Footer />
         </div>
     )
