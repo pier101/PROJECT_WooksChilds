@@ -55,10 +55,6 @@ module.exports = class Artist extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Artist.hasMany(db.Feed, {
-            foreignKey: "artistId",
-            sourceKey: "artistId",
-        });
         db.Artist.hasMany(db.Comment, {
             foreignKey: "artistId",
             sourceKey: "artistId",

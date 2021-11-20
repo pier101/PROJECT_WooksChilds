@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React, { Component } from "react";
 import axios from 'axios';
 import TextareaAutosize from '@mui/material/TextareaAutosize'

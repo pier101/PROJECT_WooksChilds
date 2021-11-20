@@ -13,13 +13,15 @@ import Menu from "./components/artist/index";
 //-----------------------------------------------//
 import Payment from "./components/shop/Payment";
 import UserInfo from "./components/profile/Userinfo";
+import { Board,Write,List,View } from "./page/index";
 import Admin from "./components/admin";
-import { Board } from "./page/index";
 import Searchpw from "./components/Login/Searchpw";
+import FindIdPw from "./components/Login/findIdPw";
 
 
 const App = ({match}) => {
   const [isLogin, setIsLogin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     if (sessionStorage.getItem("user_id") === null) {
@@ -30,6 +32,8 @@ const App = ({match}) => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  //로그인 되있을떄
   if (isLogin) {
     return (
       <>
@@ -38,9 +42,12 @@ const App = ({match}) => {
         <Route  path="/artist/:name"  component={Menu} exact/>
         <Route path="/mypage/:id" component={Profile} exact/> 
         <Route path="/Shop" component={Shop} exact/> 
-        <Route path="/GoodsInfo" component={GoodsInfo} exact/> 
-        <Route path='/Payment' component={Payment} exact /> 
         <Route path='/Admin' component={Admin} exact />
+        <Route path="/GoodsInfo/:num" component={GoodsInfo} exact/> 
+        <Route path="/board" component={Board} exact/> 
+        <Route path="/board/write" component={Write} exact/> 
+        <Route path="/board/list" component={List} exact/> 
+        <Route path="/board/View" component={View} exact/> 
       </>
     );
   } 
@@ -50,6 +57,8 @@ const App = ({match}) => {
   //   )
   // }
   
+  
+  //로그인 안되있을떄
   if(!isLogin){
     return (
         <>
@@ -60,13 +69,18 @@ const App = ({match}) => {
           {/* 철순형꺼 */}
           <Route path="/profile" component={Profile} exact/> 
           <Route path="/shop" component={Shop} exact/> 
-          <Route path="/goodsInfo" component={GoodsInfo} exact/>
           <Route path='/Payment' component={Payment} exact /> 
           <Route path="/signup" component={Signup} exact/> 
           <Route path='/Userinfo' component={UserInfo} exact />
           <Route path='/Searchpw' component={Searchpw} exact />
+          <Route  path="/find/userinfo" component={FindIdPw} exact />
           <Route path='/Admin' component={Admin} exact />
-          <Board />
+          <Route path="/GoodsInfo/:num" component={GoodsInfo} exact/> 
+          <Route path="/GoodsInfo/:num" component={GoodsInfo} exact/> 
+          <Route path="/board" component={Board} exact/> 
+          <Route path="/board/write" component={Write} exact/> 
+          <Route path="/board/list" component={List} exact/> 
+          <Route path="/board/View" component={View} exact/> 
       </>
     );
   }

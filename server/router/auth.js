@@ -1,10 +1,10 @@
 const express = require("express");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 // const Admin = require("../models/admin");
 const User = require("../models/user");
 const nodemailer = require("nodemailer");
+require('dotenv').config()
 const multer = require('multer');
 const storage  = multer.diskStorage({
     destination: (req,file,cb)=>{
@@ -78,12 +78,13 @@ router.post('/logintest', async(req, res) => {
 
 
 
-router.post("/findpwd", isNotLoggedIn, async (req, res, next) => {
-    const { usermail } = req.body;
+router.post("/findpwdd", async (req, res, next) => {
+    const { inputMail } = req.body;
+    console.log(inputMail)
     try {
         const user = await User.findOne({
             // 1. 유저가 존재하면 유저 정보를 가져옴
-            where: { userMail: usermail },
+            where: { userMail: inputMail },
         });
         console.log(user)
         //console.log(user);
@@ -108,7 +109,7 @@ router.post("/findpwd", isNotLoggedIn, async (req, res, next) => {
         
             const transporter = nodemailer.createTransport({
                 service: "gmail",
-                port: 465,
+                port: 587,
                 secure: true, // true for 465, false for other ports
                 auth: {
                     // 이메일을 보낼 계정 데이터 입력
@@ -120,7 +121,7 @@ router.post("/findpwd", isNotLoggedIn, async (req, res, next) => {
 
             const mailOptions = {
                 from: process.env.USERMAIL, // 발송 메일 주소 (위에서 작성한 gmail 계정 아이디)
-                to: usermail, // 수신 메일 주소
+                to: inputMail, // 수신 메일 주소
                 subject: "[위버스]임시 비밀변호 발급", // 제목
                  // 내용
                 html:
@@ -133,17 +134,15 @@ router.post("/findpwd", isNotLoggedIn, async (req, res, next) => {
             };
             const hash = await bcrypt.hash(newpwd, 12);
             await User.update(
-                {
-                    userPwd:hash
-                },
-                {where:{userMail:usermail}
-            })
+                {userPwd:hash},
+                {where:{userId:"dongwook12"}},
+                )
 
+            console.log("업뎃왜안됨?")
             try {
                 await transporter.verify();
                 await transporter.sendMail(mailOptions);
                 console.log("Email sent success!!!!");
-                return res.redirect("/login");
             } catch (err) {
                 console.error(err);
             }
@@ -152,15 +151,16 @@ router.post("/findpwd", isNotLoggedIn, async (req, res, next) => {
     } catch (e) {
         // try에서 result 결과값이 null일때 catch에서 에러로 잡지 않음 이유는?..
         console.error(e);
-        next(e)
     }
 });
 
 
-router.get("/logout", isLoggedIn, (req, res) => {
-    req.logout();
-    req.session.destroy();
-    res.redirect("/");
+router.delete("/:id/logout", (req, res) => {
+    console.log('로그아웃')
+    console.log(req.params.id)
+    sessionStorage.removeItem('user_id')
+    sessionStorage.clear();
+
 });
 
 

@@ -11,7 +11,7 @@ module.exports = class Image extends Sequelize.Model {
                     autoIncrement: true,
                 },
                 src: {
-                    type: Sequelize.STRING(50),
+                    type: Sequelize.STRING(100),
                     allowNull: true,
                 },
             },
@@ -28,9 +28,5 @@ module.exports = class Image extends Sequelize.Model {
         );
     }
     static associate(db) {
-        db.Image.belongsTo(db.Feed, {
-            foreignKey: "feedNum",
-            sourceKey: "feedNum",
-        });
     }
 };

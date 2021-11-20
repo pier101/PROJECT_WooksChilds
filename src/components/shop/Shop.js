@@ -65,7 +65,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
     content.userId = sessionStorage.user_id
         
       history.push({
-        pathname: '/GoodsInfo',
+        pathname: `/GoodsInfo/${content.goodsNum}`,
         state: {content: content},
     });
     console.log(history)
@@ -127,8 +127,9 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
                     <Box sx={{ pt:'10%',fontWeight: 'bold',textAlign: 'center',color:'#06e19a',fontSize:70, }}>구경 가자가자 가자고!</Box>
                     <Box sx={{ mt:5, mx:'15%', fontWeight: 'bold',textAlign: 'center',display: 'flex',  flexWrap: 'wrap',justifyContent: 'center', }}>
-
+                 
                     {goodsCard.map((a,i)=>{ return(
+                        
                         <Box key={i}>
                             <Box type="button"  className='nav-link' onClick={()=>{Submit(a)}}>
                             <Avatar

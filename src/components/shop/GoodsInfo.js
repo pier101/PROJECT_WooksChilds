@@ -11,8 +11,10 @@ import { Link } from 'react-router-dom';
 ///////////////////결제 컴포넌트
 import {useHistory,useLocation} from "react-router";
 import $ from "jquery";
+import axios from 'axios';
 
-function GoodsInfo() {
+function GoodsInfo({match}) {
+    console.log(match.params.num)
     const location = useLocation();
     const content = location.state.content !== null || undefined ? location.state.content : null;
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
@@ -71,7 +73,11 @@ const handleSubmit = (e) => {  //버틑눌러서
     });
     console.log(history)
 }
-    
+
+const WishList = async(e) =>{
+   
+    await axios.post(`http://localhost:5000/goods/${match.params.num}/wishlist`,{id:sessionStorage.user_id})
+}
     return (
         <div>
              <Box sx={{mt:10, mx:'10%',display:'flex',}}>
@@ -177,9 +183,10 @@ const handleSubmit = (e) => {  //버틑눌러서
 
                         <Box sx={{ display:'flex',justifyContent: 'space-between',}}> 
                             <Box sx={{ fontWeight: 'bold' ,textAlign: 'left',fontSize:25, }}>{content.buy_price }원</Box>
-                            <Box sx={{ pb:1, fontWeight: 'light' ,textAlign: 'left',fontSize:15, }}> 찜
-                            <Checkbox {...label}sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-                           찜</Box>
+                            {/* 동추 */}
+                            <Box sx={{ pb:1, fontWeight: 'light' ,textAlign: 'left',fontSize:15, }}> 찜 
+                            <Checkbox {...label}sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} onClick={WishList} checkedIcon={<Favorite />} />
+                           </Box>
                         </Box>
                         
 

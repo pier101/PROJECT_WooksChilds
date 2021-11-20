@@ -3,3 +3,6 @@
 # dependencies
 
 weverse.pem
+
+# dotenv environment variables file
+.env

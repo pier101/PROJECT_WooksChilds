@@ -21,7 +21,14 @@ router.get('/card:name',async(req,res)=>{
 router.get('/posts/:id',async(req,res,next)=>{
     const id = req.params.id
 
-    await Feed.findAll({where:{artistName: id}}).then(result=>res.send(result))
+    await Feed.findAll({ 
+        include:[{
+            model:User,
+            attributes:["userImg"]
+            }],
+        where:{artistName: id},
+        order: [["feedNum", "DESC"]]})
+    .then(result=>res.send(result))
     .catch(err=>{
         console.log(err) 
         throw err;
@@ -48,7 +55,7 @@ if(isUser.role ==="artist"){
 
     await Feed.findAll({where:{
         artistName: name
-    }
+    },order: [["feedNum", "DESC"]]
     }).then(data=>res.json(data))
     }
 });
@@ -75,11 +82,14 @@ console.log(name)
                     artistfeedContent: content,  
                     artistName: name,
                     userId : id,
+                    artistfeedImg: img[0]
         })
         await ArtistFeed.findAll({where:{
             artistName: name
-        }
-        }).then(data=>res.json(data))
+        },order: [["artistFeedNum", "DESC"]]
+        }).then(data=>{
+            console.log(data)
+            res.json(data)})
     }
 
     // .then((result) => {
@@ -95,10 +105,16 @@ console.log(name)
 //아티스트글 가져오기
 router.get("/Aposts/:name", async(req, res, next) => {
 const name = req.params.name
-        await ArtistFeed.findAll({where:{
-            artistName: name
-        }
-        }).then(data=>res.json(data))
+        await ArtistFeed.findAll({
+            include:[{
+                model:User,
+                attributes:["userImg"]
+            }],
+            where:{artistName: name},
+            order: [["artistFeedNum", "DESC"]]
+        })
+        .then(data=>res.json(data))
+        .catch(err=>console.error(err))
     })
 
     // .then((result) => {

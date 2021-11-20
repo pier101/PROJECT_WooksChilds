@@ -30,7 +30,7 @@ module.exports = class User extends Sequelize.Model {
                     allowNull: false,
                 },
                 userImg: {
-                    type: Sequelize.STRING(100),
+                    type: Sequelize.STRING(200),
                     allowNull: false,
                     defaultValue : "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
                 },

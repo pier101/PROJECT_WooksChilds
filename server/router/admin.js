@@ -23,6 +23,7 @@ router.post("/atistcard",async (req, res) => {
 
 router.post("/goods",async (req, res) => {
     const {artistName,goodsName,goodsPrice,goodsContent } = req.body.Content;
+    console.log("만들기")
     try {
         const checkName = await Goods.findOne({ where: { goodsName } });    //상품 중복확인
         if (checkName) {

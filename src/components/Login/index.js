@@ -9,7 +9,8 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import axios from 'axios'
-
+import { useHistory } from 'react-router';
+import FindIdPw from "./findIdPw";
 //import { loginUser } from '../../modules/user';
 //import Login from "./";
 
@@ -23,7 +24,7 @@ const Login = (props) => {
   };
   const avatarStyle = { backgroundColor: "#004DAA" }; 
 
- 
+ const history = useHistory()
   const [idValue, setIdValue] = useState("")
   const [pwValue, setPwValue] = useState("")
 
@@ -50,6 +51,7 @@ const Login = (props) => {
       console.log('========',res.data.msg)
       sessionStorage.setItem('user_id', idValue)
       console.log('======================','로그인 성공')
+      // history.push(`/mypage/${sessionStorage.user_id}`)
       document.location.href = '/'
   }
   });
@@ -122,12 +124,10 @@ const Login = (props) => {
             },
           }}
         >
-          <Link href="#" underline="hover">
-            {"비밀번호 찾기"}
+          <Link href="/find/userinfo" underline="hover">
+            {"아이디 비빌번호 찾기"}
           </Link>
-          <Link href="#" underline="hover">
-            {"아이디 찾기"}
-          </Link>
+          
           <Link href="" underline="hover" path="/Signup">
             {"회원가입"}
           </Link>

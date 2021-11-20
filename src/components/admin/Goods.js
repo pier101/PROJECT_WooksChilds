@@ -22,19 +22,20 @@ const  [artistCard,setArtistCard] = useState([]);
     const Change = (e) => {
         Content[e.target.name] = e.target.value;
         }
-
-    const Submit = async(e) => {
-        e.preventDefault();
+        
+        const Submit = async(e) => {
+            e.preventDefault();
+            console.log("goods")
         
         if(Content.goodsName.length<7){
         const res = await axios.post(`http://localhost:5000/admin/goods`,{Content});
         const check = res.data.data
             if(check===true) {
-                //아이디있으면 트루
+                //아이디있으면 트루 
                 alert(`현재 있는 상품입니다 확인해주세욘.`);    
                 //새로고침시 업데이트 되는걸 새로고침 없이 업데이트 되게 손 봐야됨
             }
-            else if(check===false){
+            else if(check===false){ 
                 alert(`정상등록되었다!`);
 
             }

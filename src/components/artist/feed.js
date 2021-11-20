@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef,useCallback,Fragment  } from "react";
 import axios from 'axios';
 import {Box,Divider} from '@mui/material';
 import './style.css'
+import Loading from './Loader'
+import {useInView} from 'react-intersection-observer'
 
 const Feed = ({match, isFeed,isArtist}) => {
-
+    const lastItem = useRef() 
     const [content, setContent] = useState("") //const content = ""인 상태
 
     const [viewContent , setViewContent] = useState([]);
@@ -16,51 +18,131 @@ const Feed = ({match, isFeed,isArtist}) => {
     const [getUser,setUser] =useState([])
     const [myImage, setMyImage] = useState([]);
     
+    //-----------------
+    const [page, setPage] = useState(1)
+    const [initNum, setInitNum]= useState(0)
+    const [loading, setLoading] = useState(true)
+    const [ref, inView] = useInView()
+    
+    const [pageA, setPageA] = useState(1)
+    const [initNumA, setInitNumA]= useState(0)
+    const [loadingA, setLoadingA] = useState(true)
+    const [refA, inViewA] = useInView()
+    //--------------------
+    const [like,setLike] = useState(false);
+    const [commentnum,setCommentNum] = useState(null)
+    //--------------------
+     // 서버에서 아이템을 가지고 오는 함수
+  const getItems = useCallback(async () => {
+
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await axios.get(`http://localhost:5000/artist/posts/${match.params.name}`).then((res) => {
+          console.log(res.data)
+          const emptyData = res.data.slice(initNum,initNum+5)
+          console.log(emptyData.length)
+          setViewContent(prevState => prevState.concat(res.data.slice(initNum,initNum+5)))
+          console.log(initNum)
+          if(emptyData.length===0){
+            setLoading(false)
+        } else {
+            setLoading(true)
+        }
+    })
+    
+}, [page])
+
+// `getItems` 가 바뀔 때 마다 함수 실행
+useEffect(() => {
+    getItems()
+}, [getItems])
+
+useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView && loading) {
+        setPage(prevState => prevState + 1)
+        setInitNum(initNum+5)
+        console.log(initNum)
+    }
+  }, [inView,loading])
+
+
+
+  const getItemsA = useCallback(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await axios.get(`http://localhost:5000/artist/Aposts/${match.params.name}`).then((res) => {
+        const emptyData = res.data.slice(initNumA,initNumA+5)
+        console.log(emptyData)
+    setViewContentA(prevState => prevState.concat(res.data.slice(initNumA+1,initNumA+5)))
+      console.log(initNumA)
+      if(emptyData.length===0){
+        setLoadingA(false)
+      } else {
+        setLoadingA(true)
+      }
+    })
+  }, [pageA])
+
+  // `getItems` 가 바뀔 때 마다 함수 실행
+  useEffect(() => {
+    getItemsA()
+  }, [getItemsA])
+
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inViewA && loadingA) {
+      setPageA(prevState => prevState + 1)
+      setInitNumA(initNumA+5)
+      console.log(initNumA)
+    }
+  }, [inViewA, loadingA])
+
+
+    const addImage = e =>{
+        const nowSelectImageList = e.target.files;
+        const nowImageURLList = [...myImage];
+        for (let i = 0; i < nowSelectImageList.length; i++) {
+            const nowImageUrl = URL.createObjectURL(nowSelectImageList[i]);
+            nowImageURLList.unshift(nowImageUrl);
+            
+        }
+        console.log(nowSelectImageList)
+        setMyImage(nowImageURLList)
+    }
 
     //게시글 작성내용 > db에 저장
     const PostWrite = async(e) => {
+        setInitNum(initNum+1)
+        console.log(initNum)
         e.preventDefault();
         await axios.post(`http://localhost:5000/artist/posts/${match.params.name}`,{content,id:sessionStorage.user_id})
         .then(res=>{
- 
             if(typeof res.data === "string"){
                 return alert(res.data)
             }
-            const desc= res.data
-            
-            desc.sort((data, nextdata )=> {
-                return nextdata.feedNum - data.feedNum
-            })
-            console.log(desc)
-            setViewContent(desc)
+            setViewContent(res.data)
         })
     }
     
     //아티스트가 게시글 작성
     const ArtistPostWrite = async(e) => {
         e.preventDefault();
-
-
-        await axios.post(`http://localhost:5000/artist/Aposts/${match.params.name}`,{content,id:sessionStorage.user_id})
+        await axios.post(`http://localhost:5000/artist/Aposts/${match.params.name}`,{content,id:sessionStorage.user_id,img: myImage})
         .then(res=>{
             if(typeof res.data === "string"){
                 return alert(res.data)
             }
-            const descA= res.data
-            console.log(descA)
-            descA.sort((data, nextdata )=> { 
-                return nextdata.artistFeedNum - data.artistFeedNum
-            })
-            setViewContentA(descA)
+            // const descA= res.data
+            // console.log(descA)
+            // descA.sort((data, nextdata )=> { 
+            //     return nextdata.artistFeedNum - data.artistFeedNum
+            // })
+            console.log('도달')
+            setViewContentA(res.data)
+            console.log(res.data)
         })
     }
 
-    //파일 미리볼 url을 저장해줄 state 
-    const [fileImage, setFileImage] = useState(""); 
-    // 파일 저장 
-    const saveFileImage = (e) => { setFileImage(URL.createObjectURL(e.target.files[0])); };
-     // 파일 삭제 
-    const deleteFileImage = () => { URL.revokeObjectURL(fileImage); setFileImage(""); };
+
     
     //피드게시물 삭제
     const deleteFeed = async(e)=>{
@@ -122,8 +204,10 @@ const Feed = ({match, isFeed,isArtist}) => {
     }
 
     //edit 댓글창 생성
-    const editOn = () => {
-        setIsTrue(true);
+    const editOn = (data1) => {
+       
+        console.log(data1.commentNum)
+        setCommentNum(data1.commentNum)
       };
     //edit 댓글창 내용
     const handleEidtComment = (e) =>{
@@ -133,7 +217,7 @@ const Feed = ({match, isFeed,isArtist}) => {
     const handleKeyDown = async(e) => {
         if (e.key === "Enter") {
             const num = e.target.id;
-            setIsTrue(!isTrue);
+            setCommentNum(null);
             await axios.post(`http://localhost:5000/artist/comment/${match.params.name}/edit`,{comment, num : num }).then(res=>{
                     setViewComment(res.data)
         })
@@ -142,7 +226,7 @@ const Feed = ({match, isFeed,isArtist}) => {
     const handleKeyDownA = async(e) => {
         if (e.key === "Enter") {
             const num = e.target.id;
-            setIsTrue(!isTrue);
+            setCommentNum(null);
             await axios.post(`http://localhost:5000/artist/comment/${match.params.name}/edit`,{comment, num : num }).then(res=>{
                     setViewCommentA(res.data)
         })
@@ -161,17 +245,12 @@ const Feed = ({match, isFeed,isArtist}) => {
     //첫 렌더링 화면 설정
     useEffect(()=>{
         console.log('useEffect')
-        const getFeed = async ()=>{
-            await axios.get(`http://localhost:5000/artist/posts/${match.params.name}`) //package.json 밑에 (proxy:주소) 넣어주면 경로에 서버주소 안 넣어도 됨
-            .then(res=>{
-                //내림차순 정렬
-                const desc= res.data
-                desc.sort((data, nextdata )=> {
-                    return nextdata.feedNum - data.feedNum
-                })
-            setViewContent(res.data)
-            }).catch(err=>console.log(err))
-        };  
+        // const getFeed = async ()=>{
+        //     await axios.get(`http://localhost:5000/artist/posts/${match.params.name}`) //package.json 밑에 (proxy:주소) 넣어주면 경로에 서버주소 안 넣어도 됨
+        //     .then(res=>{
+        //     setViewContent(res.data.slice(0,5))
+        //     }).catch(err=>console.log(err))
+        // };  
 
         const getComment = async ()=>{
             await axios.get(`http://localhost:5000/artist/comment/${match.params.name}`)
@@ -192,19 +271,15 @@ const Feed = ({match, isFeed,isArtist}) => {
             await axios.get(`http://localhost:5000/mypage/${sessionStorage.user_id}`).then(res=>setUser(res.data))
         }
         
-        const getArtistContent = async()=>{
-            await axios.get(`http://localhost:5000/artist/Aposts/${match.params.name}`)
-            .then(res=>{
-            const descA= res.data
-            descA.sort((data, nextdata )=> {
-                return nextdata.artistFeedNum - data.artistFeedNum
-            })
-            setViewContentA(descA)
-        }).catch(err=>console.log(err))}
-        getFeed();
+        // const getArtistContent = async()=>{
+        //     await axios.get(`http://localhost:5000/artist/Aposts/${match.params.name}`)
+        //     .then(res=>{
+        //     setViewContentA(res.data)
+        // }).catch(err=>console.log(err))}
+        // getFeed();
         getComment();
         getUser();
-        getArtistContent();
+        // getArtistContent();
         getArtistComment()
 
     },[]);
@@ -228,51 +303,57 @@ const Feed = ({match, isFeed,isArtist}) => {
                             
                         <div>
                             <form method="POST">
-                            {viewContent && viewContent.map((data) =>{
-                                return (
-                                <div className='feed'>
-                                    <div className="feeder">
-                                        <div>
-                                            <img src={getUser.userImg} alt="유저이미지" />
-                                            <span>{data.userId}</span>
+                            {viewContent && viewContent.map((data, index) =>(
+                                <Fragment key={index}>
+                                    <div className='feed'  ref={ref} >
+                                        <div className="feeder">
+                                            <div>
+                                                <img src={data.User.userImg} alt="유저이미지" />
+                                                <span>{data.userId}</span>
+                                            </div>
+                                            {getUser.userId ===data.userId &&
+                                            <div>
+                                                <button id={data.feedNum} type="button" onClick={deleteFeed}>삭제</button>
+                                            </div>}
                                         </div>
-                                        {getUser.userId ===data.userId &&
-                                        <div>
-                                            <button id={data.feedNum} type="button" onClick={deleteFeed}>삭제</button>
-                                        </div>}
-                                    </div>
-                                    <div className='feed-content'>
-                                        <p key={toString(data.feedNum)} >{data.feedContent}</p>
-                                        <p className="date">{new Date(data.feedCreated).toLocaleString()}</p>
-                                    </div>      
-                                    <Divider sx={{m:1,mx:0}}/>              
-                                    <legend><h6>comment</h6></legend>
-                                    <ul style={{listStyle:"none"}}>
-                                        {viewComment &&viewComment.map(data1 => {
-                                            if (data1.feedNum === data.feedNum) {
-                                                return(
-                                                    // 유저게시물에 내 댓글들
-                                        
-                                        <div key={data1.commentNum}>
-                                            <li className="comment-content">
-                                                <div  className='id'>
-                                                    <div>
-                                                    {data1.userId} 
+                                        <div className='feed-content'>
+                                            <p key={toString(data.feedNum)} >{data.feedContent}</p>
+                                            <p className="date">{new Date(data.feedCreated).toLocaleString()}</p>
+                                        </div>      
+                                        <Divider sx={{m:1,mx:0}}/>              
+                                        <legend><h6>comment</h6></legend>
+                                        <ul style={{listStyle:"none"}}>
+                                            {viewComment &&viewComment.map(data1 => {
+                                                if (data1.feedNum === data.feedNum) {
+                                                    return(
+                                                        // 유저게시물에 내 댓글들
+                                            
+                                            <div key={data1.commentNum}>
+                                                <li className="comment-content">
+                                                    <div  className='id'>
+                                                        <div>
+                                                        {data1.userId} 
+                                                        </div>
+                                                        <span>{data1.commentContent}</span>
                                                     </div>
-                                                    <span>{data1.commentContent}</span>
-                                                </div>
-                                                {getUser.userId ===data1.userId &&
-                                                <div className='button'>
-                                                    <button type="button" onClick={() => editOn()}>수정</button>
-                                                    <button id={data1.commentNum} type="button" onClick={(e)=>deleteOn(e)}>삭제</button>
-                                                </div>
+                                                    {getUser.userId ===data1.userId &&
+                                                    <div className='button'>
+                                                        <button id={data1.commentNum} type="button" onClick={()=>editOn(data1)}>수정</button>
+                                                        <button id={data1.commentNum} type="button" onClick={(e)=>deleteOn(e)}>삭제</button>
+                                                        <span></span>
+                                                    </div>
+                                                    }
+                                                  
+                                                    
+                                                </li>
+                                                {commentnum === data1.commentNum && 
+                                                  <input id={data1.commentNum} type="text" size="40"  onChange={(e) => handleEidtComment(e)} onKeyDown={handleKeyDown}/>
+                                                   } 
+                                            </div >
+                                                    )
                                                 }
-                                            </li>
-                                            {isTrue && <input id={data1.commentNum} type="text" size="40"  onChange={(e) => handleEidtComment(e)} onKeyDown={handleKeyDown}/>}
-                                        </div >
-                                                )
-                                            }
-                                        })}
+                                            })}
+
                                         <li>
                                             {/* <span id="myId">{db아이디}</span> */}
                                             <textarea style={{marginTop:10}} onChange={handleComment}  id="comment" cols="52" rows="2"></textarea>
@@ -280,10 +361,19 @@ const Feed = ({match, isFeed,isArtist}) => {
                                         </li>
                                     </ul>
                                 </div>
-                                )
-                            })}
+                                     
+                                </Fragment>
+                                ))}
                             </form>
-                        </div>      
+                        </div>     
+
+                                {loading && (
+                                <Loading/>
+                            )}
+                            {/* {isLoding ? (
+                                <Loading/>
+                            ) : ("")} */}
+                            
                         </form>
                     </div>
                 </div>
@@ -299,25 +389,22 @@ const Feed = ({match, isFeed,isArtist}) => {
                             <div className="feed-input-box-art">
                                 <h5>CL님의 공간</h5>
                                 <textarea className="textarea-art" type="text" value={content} aria-label="empty textarea" placeholder="메세지를 입력해주세요" onChange={ChangePostContent} style={{ width: 550,height: 150 }}/>
-                                {fileImage && ( <img alt="sample" src={fileImage} style={{ margin: "auto" }} /> )}
-                                <div style={{ alignItems: "center", justifyContent: "center", }} > 
-                                <input name="imgUpload" type="file" accept="image/*" onChange={saveFileImage} /> <button style={{ backgroundColor: "gray", color: "white", width: "55px", height: "40px", cursor: "pointer", }} onClick={() => deleteFileImage()} > 삭제 </button>
-                                </div>
-
-
+                                <label htmlFor="input-file" className="OOTDwrite-input-file" onChange={addImage}>
+                                    <div>addaddd</div>
+                                    <input type="file" mulitple="multiple" id="input-file" style={{display:"none"}} accept=".jpg,.jpeg,.png" />
+                                </label>
                                 <input type='submit' value='피드 생성하기' style={{border:"none" }} />
                             
                             </div>
                             
                         <div>
                             <form method="POST">
-                            {viewContentA && viewContentA.map((data) =>{
-                                return (
-
-                                <div className='feed'>
+                            {viewContentA && viewContentA.map((data,index) =>(
+                                 <Fragment key={index}>
+                                    <div className='feed'  ref={refA} >
                                     <div className="feeder">
                                         <div>
-                                            <img src={getUser.userImg} alt="유저이미지" />
+                                            <img src={data.User.userImg} alt="유저이미지" />
                                             <span>{data.userId}</span>
                                         </div>
                                         {getUser.userId ===data.userId &&
@@ -351,12 +438,15 @@ const Feed = ({match, isFeed,isArtist}) => {
                                                 </div>
                                                 <div style={{fontSize:13,float:"right"}}>{new Date(data1.commentCreated).toLocaleDateString()}</div>
                                                 {getUser.userId ===data1.userId &&
-                                                <div className='button'>
-                                                    <button type="button" onClick={() => editOn()}>수정</button>
+                                                <div className='feed-button'>
+                                                    <button type="button" onClick={() => editOn(data1)}>수정</button>
                                                     <button id={data1.commentNum} type="button" onClick={(e)=>deleteOnA(e)}>삭제</button>
                                                 </div>}
                                             </li>
-                                            {isTrue && <input id={data1.commentNum} type="text" size="40"  onChange={(e) => handleEidtComment(e)} onKeyDown={handleKeyDownA}/>}
+                                                {commentnum === data1.commentNum && 
+                                                  <input id={data1.commentNum} type="text" size="40"  onChange={(e) => handleEidtComment(e)} onKeyDown={handleKeyDownA}/>
+                                                   } 
+                                      
                                         </div >
                                                 )
                                             }
@@ -367,10 +457,13 @@ const Feed = ({match, isFeed,isArtist}) => {
                                         </li>
                                     </ul>
                                 </div>
-                                )
-                            })}
+                                </Fragment>
+                                ))}
                             </form>
                         </div>      
+                        {loadingA && (
+                                <Loading/>
+                            )}
                         </form>
                     </div>
                 </div>

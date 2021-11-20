@@ -22,7 +22,7 @@ module.exports = class Comment extends Sequelize.Model {
             },
             {
                 sequelize,
-                timestamps: true,
+                timestamps: false,
                 underscored: false,
                 modelName: "Comment",
                 tableName: "comments",

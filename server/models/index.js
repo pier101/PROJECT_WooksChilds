@@ -14,6 +14,7 @@ const User = require("./user");
 const Follow = require('./follow')
 const Image = require('./image')
 const Board = require("./board");
+const WishList = require("./wishlist");
 // const FollowList = require('./followlist')
 
 const env = process.env.NODE_ENV || "development";
@@ -60,6 +61,7 @@ db.User = User;
 db.Follow = Follow;
 db.Image = Image;
 db.Board = Board;
+db.WishList = WishList;
 
 // db.FollowList = FollowList;
 
@@ -77,6 +79,7 @@ User.init(sequelize);
 Follow.init(sequelize);
 Image.init(sequelize);
 Board.init(sequelize);
+WishList.init(sequelize);
 
 // FollowList.init(sequelize);
 
@@ -94,6 +97,7 @@ User.associate(db);
 Follow.associate(db);
 Image.associate(db);
 Board.associate(db);
+WishList.associate(db);
 // FollowList.associate(db);
 
 module.exports = db;

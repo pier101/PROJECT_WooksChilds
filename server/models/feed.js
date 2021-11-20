@@ -19,10 +19,6 @@ module.exports = class Feed extends Sequelize.Model {
                     allowNull: true,
                     defaultValue: Sequelize.NOW,
                 },
-                feedImg:{
-                    type: Sequelize.STRING(80),
-                    allowNull: true,
-                }
             },
             {
                 sequelize,
@@ -41,10 +37,6 @@ module.exports = class Feed extends Sequelize.Model {
         db.Feed.belongsTo(db.User, {
             foreignKey: "userId",
             sourceKey: "userId",
-        });
-        db.Feed.belongsTo(db.Artist, {
-            foreignKey: "artistId",
-            sourceKey: "artistId",
         });
         db.Feed.belongsTo(db.ArtistCard, {
             foreignKey: "artistName",
