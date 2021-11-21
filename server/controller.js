@@ -1,12 +1,12 @@
-// const path = require("path");
-const model = require("./models");
+const path = require("path");
+const model = require("./model");
 
-// const salt = require(path.join(__dirname, "config")).salt;
+const salt = require(path.join(__dirname, "config")).salt;
 
 // const hashing = require(path.join(__dirname, "config"));
 
 module.exports = {
-  // needs: () => upload,
+  needs: () => upload,
 
   add: {
     board: (req, res) => {

@@ -1,6 +1,8 @@
 import React, { Component ,useEffect,useState} from 'react';
 import './main.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { render } from 'react-dom';
 
 
 const View = ({match})=>{
@@ -17,10 +19,15 @@ const View = ({match})=>{
   axios.post('/board/delete/board', {data:match.params.data}).then(res=>deleteView(res.data))}
   alert('삭제완료')
   return  window.location.href = '/board'
+
   }
+  const editView = async function(){
+  axios.post('board/:id/:boardnum/edit', {data:match.params.data}).then(res=>setData(res.data))
+    }
 
-
-
+  
+  
+ 
   
       return (
        <div className='Write'style={{marginTop:50}}>
@@ -28,14 +35,14 @@ const View = ({match})=>{
                   <input type='text' id='title_txt' name='title' defaultValue={data.title} readOnly/>
                 </div>
                 <div>
-                  {data.date}
+                  {/* {data.date} */}
                 </div>
                 <div>
                   <textarea id='content_txt' name='contents' defaultValue={data.contents} readOnly></textarea>
                 </div>
                 <div className="view_button">
-                  <input type="button" value="수정"/>
-                  <input  type="button"  value="삭제" onClick={() =>deleteView()}/>
+               <input type='button' value='수정'onClick={() =>editView} />
+                <input  type="button"  value="삭제" onClick={() =>deleteView()}/>
                   <input type='button' value='목록'onClick={() => window.location.href = '/board'}/>
                 </div>
               </div>

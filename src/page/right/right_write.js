@@ -31,13 +31,13 @@ class right_write extends Component {
 
     if (res.data) {
       alert("글 등록이 완료되었습니다.");
-      return window.location.replace("/board");
+      return window.location.replace("/board/");
     }
   };
 
   render() {
     return (
-      <div style={{marginTop:70}}>
+      <div style={{marginTop:100}}>
         <div id="post_submit">
           <button onClick={() => this._submitBoard()}> 등록 </button>
         </div>

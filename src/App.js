@@ -13,7 +13,7 @@ import Menu from "./components/artist/index";
 //-----------------------------------------------//
 import Payment from "./components/shop/Payment";
 import UserInfo from "./components/profile/Userinfo";
-import { Board,Write,List,View } from "./page/index";
+import { Board } from "./page/index";
 import Admin from "./components/admin";
 import Searchpw from "./components/Login/Searchpw";
 import FindIdPw from "./components/Login/findIdPw";
@@ -44,10 +44,8 @@ const App = ({match}) => {
         <Route path="/Shop" component={Shop} exact/> 
         <Route path='/Admin' component={Admin} exact />
         <Route path="/GoodsInfo/:num" component={GoodsInfo} exact/> 
-        <Route path="/board" component={Board} exact/> 
-        <Route path="/board/write" component={Write} exact/> 
-        <Route path="/board/list" component={List} exact/> 
-        <Route path="/board/View" component={View} exact/> 
+        <Board />
+
       </>
     );
   } 
@@ -77,10 +75,7 @@ const App = ({match}) => {
           <Route path='/Admin' component={Admin} exact />
           <Route path="/GoodsInfo/:num" component={GoodsInfo} exact/> 
           <Route path="/GoodsInfo/:num" component={GoodsInfo} exact/> 
-          <Route path="/board" component={Board} exact/> 
-          <Route path="/board/write" component={Write} exact/> 
-          <Route path="/board/list" component={List} exact/> 
-          <Route path="/board/View" component={View} exact/> 
+          <Board />
       </>
     );
   }
