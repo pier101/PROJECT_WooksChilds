@@ -60,7 +60,7 @@ const ArtistInfo = ({match}) => {
         if (!isTrue) {
             setIsTrue(true)
             setIsFollow("fllowing")
-            return await axios.post(`http://localhost:5000/artist/follow/${match.params.name}`,{
+            return await axios.post(`http://172.31.3.72/artist/follow/${match.params.name}`,{
                 id :sessionStorage.user_id
             }).then(res=>{
                 setIsFollowCounter(Number(res.data))
@@ -69,7 +69,7 @@ const ArtistInfo = ({match}) => {
         } else {
             setIsTrue(false)
             setIsFollow("follow")
-            return await axios.post(`http://localhost:5000/artist/unfollow/${match.params.name}`,{
+            return await axios.post(`http://172.31.3.72/artist/unfollow/${match.params.name}`,{
                 id :sessionStorage.user_id
             }).then(res=>setIsFollowCounter(Number(res.data)))
         }
@@ -77,12 +77,12 @@ const ArtistInfo = ({match}) => {
     
     useEffect(()=>{
         const artistinfo =async()=> {
-            const getartistinfo = await axios.get(`http://localhost:5000/artist/artistinfo/${match.params.name}`)
+            const getartistinfo = await axios.get(`http://172.31.3.72/artist/artistinfo/${match.params.name}`)
             console.log(getartistinfo.data)
             setArtistInfo(getartistinfo.data[0])
         }
         const followCount =async()=> {
-            await axios.get(`http://localhost:5000/artist/followcounter/${match.params.name}`).then(res=>setIsFollowCounter(Number(res.data)))
+            await axios.get(`http://172.31.3.72/artist/followcounter/${match.params.name}`).then(res=>setIsFollowCounter(Number(res.data)))
         }
         artistinfo();
         followCount()

@@ -40,7 +40,7 @@ function UserInfo() {
 
   //db에서 유저 네임/id 가져오기
   useEffect(async () => {
-    const res = await axios.get(`http://localhost:5000/Userinfo`);
+    const res = await axios.get(`http://172.31.3.72/Userinfo`);
     // setUserName(res.data.username);
     // setUserId(res.data.userid);
     console.log(res.data);

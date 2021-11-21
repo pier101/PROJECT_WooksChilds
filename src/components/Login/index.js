@@ -41,7 +41,7 @@ const Login = (props) => {
     console.log('로그인 버튼 클릭');
 
     const login =async ()=> {
-      await axios.post('http://localhost:5000/auth/logintest',{id:idValue, pw: pwValue })
+      await axios.post('http://172.31.3.72/auth/logintest',{id:idValue, pw: pwValue })
     .then(res =>{
       console.log(res.data);
     if(res.data===false) {

@@ -12,7 +12,7 @@ export default function Artists() {
     const  [artistCard,setArtistCard] = useState([]);
     //로딩시 카드불러올꺼임
     useEffect(()=>{  
-             axios.get(`http://localhost:5000/artistCard`)
+             axios.get(`http://172.31.3.72/artistCard`)
             .then( (res)=>{setArtistCard(res.data)})
         },[])
 

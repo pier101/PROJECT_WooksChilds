@@ -17,7 +17,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
     const  [goodsCard,setGoodsCard] = useState([]);
     //로딩시 카드불러올꺼임
     useEffect(()=>{  
-             axios.get(`http://localhost:5000/goodsCard`)
+             axios.get(`http://172.31.3.72/goodsCard`)
             .then( (res)=>{setGoodsCard(res.data)})
         },[])
 

@@ -96,7 +96,7 @@ export default function Post() {
  { id: 1, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ])
  useEffect(()=>{  
-    axios.get(`http://localhost:5000/admin/goodsCard`)
+    axios.get(`http://172.31.3.72/admin/goodsCard`)
    .then( (res)=>{setRows(res.data)})
 },[])
 console.log(rows)

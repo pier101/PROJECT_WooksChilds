@@ -14,7 +14,7 @@ export default function News() {
   
   //검색
   useEffect(()=>{  
-    axios.get(`http://localhost:5000/search?query=${Delay} `)
+    axios.get(`http://172.31.3.72/search?query=${Delay} `)
         .then( (res)=>{setImg(res.data.items)})
   },[Delay])
 

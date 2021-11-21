@@ -7,7 +7,7 @@ export default function Goods() {
 const  [artistCard,setArtistCard] = useState([]);
     //로딩시 카드불러올꺼임
     useEffect(()=>{  
-             axios.get(`http://localhost:5000/artistCard`)
+             axios.get(`http://172.31.3.72/artistCard`)
             .then( (res)=>{setArtistCard(res.data)})
         },[])
 ////////////////////////////////////////////
@@ -27,7 +27,7 @@ const  [artistCard,setArtistCard] = useState([]);
         e.preventDefault();
         
         if(Content.goodsName.length<7){
-        const res = await axios.post(`http://localhost:5000/admin/goods`,{Content});
+        const res = await axios.post(`http://172.31.3.72/admin/goods`,{Content});
         const check = res.data.data
             if(check===true) {
                 //아이디있으면 트루

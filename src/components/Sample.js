@@ -33,7 +33,7 @@ class Sample extends Component {
     }
 
     // CreatePost = async(e)=>{
-    //     const get = await  axios('http://localhost:5000/posts', {
+    //     const get = await  axios('http://172.31.3.72/posts', {
     //         method : 'POST'
     //     })
     //     if(get){

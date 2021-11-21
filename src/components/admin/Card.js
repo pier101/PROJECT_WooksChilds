@@ -14,7 +14,7 @@ export default function Card() {
     }
     const cardSubmit = async(e) => {
         e.preventDefault();
-        const res = await axios.post(`http://localhost:5000/admin/atistcard`,{cardContent});
+        const res = await axios.post(`http://172.31.3.72/admin/atistcard`,{cardContent});
         const check = res.data.data
         console.log(check)
             if(check===true) {

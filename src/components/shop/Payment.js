@@ -18,7 +18,7 @@ import {authenticate} from "./common/authenticate";
     })
     const [user, setUser] = useState([])
     useEffect(()=>{  
-        axios.get(`http://localhost:5000/mypage/${sessionStorage.user_id}`)
+        axios.get(`http://172.31.3.72/mypage/${sessionStorage.user_id}`)
        .then( (res)=>{setUser(res.data)})
    },[post])
     ////////////////결제
@@ -46,7 +46,7 @@ import {authenticate} from "./common/authenticate";
             });
         } else {
             /////////////////////////////////////////여기엑시오스해서 저장할꺼보내야도미
-            axios.post(`http://localhost:5000/goodsOder`,{content});
+            axios.post(`http://172.31.3.72/goodsOder`,{content});
             history.push({
                 pathname: '/',
             });

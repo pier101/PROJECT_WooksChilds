@@ -46,14 +46,14 @@ export default function Profile() {
 
       useEffect(()=>{
         const getData = async()=>{
-          await axios.get(`http://localhost:5000/mypage/${sessionStorage.user_id}`)
+          await axios.get(`http://172.31.3.72/mypage/${sessionStorage.user_id}`)
           .then(res=>{
             console.log(res.data)
             setUser(res.data)
           }).catch(err=>console.log(err))
         }
         const FeedData = async()=>{
-          await axios.get(`http://localhost:5000/mypage/feed/${sessionStorage.user_id}`)
+          await axios.get(`http://172.31.3.72/mypage/feed/${sessionStorage.user_id}`)
           .then(res=>{
             console.log(res.data)
             setFeed(res.data)

@@ -142,7 +142,7 @@ function checkEmail() {
   //회원가입 요청
   const onSignUp = () =>{
     const signUpToServer = async ()=>{
-      await axios.post('http://localhost:5000/auth/signup',{
+      await axios.post('http://172.31.3.72/auth/signup',{
         id : idValue, 
         pw2 : pwValue2, 
         name : nameValue, 

@@ -20,7 +20,7 @@ const Feed = ({match, isFeed,isArtist}) => {
     //게시글 작성내용 > db에 저장
     const PostWrite = async(e) => {
         e.preventDefault();
-        await axios.post(`http://localhost:5000/artist/posts/${match.params.name}`,{content,id:sessionStorage.user_id})
+        await axios.post(`http://172.31.3.72/artist/posts/${match.params.name}`,{content,id:sessionStorage.user_id})
         .then(res=>{
  
             if(typeof res.data === "string"){
@@ -41,7 +41,7 @@ const Feed = ({match, isFeed,isArtist}) => {
         e.preventDefault();
 
 
-        await axios.post(`http://localhost:5000/artist/Aposts/${match.params.name}`,{content,id:sessionStorage.user_id})
+        await axios.post(`http://172.31.3.72/artist/Aposts/${match.params.name}`,{content,id:sessionStorage.user_id})
         .then(res=>{
             if(typeof res.data === "string"){
                 return alert(res.data)
@@ -65,12 +65,12 @@ const Feed = ({match, isFeed,isArtist}) => {
     //피드게시물 삭제
     const deleteFeed = async(e)=>{
         const feednum = e.target.id
-        await axios.post(`http://localhost:5000/artist/posts/${match.params.name}/delete`,{feednum,id :sessionStorage.user_id})
+        await axios.post(`http://172.31.3.72/artist/posts/${match.params.name}/delete`,{feednum,id :sessionStorage.user_id})
         .then(res=>setViewContent(res.data))
     }
     const deleteFeedA = async(e)=>{
         const artistfeednum = e.target.id
-        await axios.post(`http://localhost:5000/artist/posts/${match.params.name}/deleteA`,{artistfeednum})
+        await axios.post(`http://172.31.3.72/artist/posts/${match.params.name}/deleteA`,{artistfeednum})
         .then(res=>setViewContentA(res.data))
     }
     
@@ -78,10 +78,10 @@ const Feed = ({match, isFeed,isArtist}) => {
     const addComment = async(e)=>{
         e.preventDefault();
         const feedNumber = e.target.id
-        await axios.post(`http://localhost:5000/artist/comment`,{comment, id :sessionStorage.user_id ,feedNumber : feedNumber, name: match.params.name})
+        await axios.post(`http://172.31.3.72/artist/comment`,{comment, id :sessionStorage.user_id ,feedNumber : feedNumber, name: match.params.name})
         .then(res=>console.log(res.data))
         
-        await axios.get(`http://localhost:5000/artist/comment/${match.params.name}`)
+        await axios.get(`http://172.31.3.72/artist/comment/${match.params.name}`)
         .then(res=>{
             setViewComment(res.data)
         })
@@ -90,10 +90,10 @@ const Feed = ({match, isFeed,isArtist}) => {
     const addArtistComment = async(e)=>{
         e.preventDefault();
         const artistFeedNumber = e.target.id
-        await axios.post(`http://localhost:5000/artist/comment/artistfeed`,{comment, id :sessionStorage.user_id ,artistFeedNumber : artistFeedNumber, name: match.params.name})
+        await axios.post(`http://172.31.3.72/artist/comment/artistfeed`,{comment, id :sessionStorage.user_id ,artistFeedNumber : artistFeedNumber, name: match.params.name})
         .then(res=>console.log(res.data))
         
-        await axios.get(`http://localhost:5000/artist/comment/artistfeed/${match.params.name}`)
+        await axios.get(`http://172.31.3.72/artist/comment/artistfeed/${match.params.name}`)
         .then(res=>{
             console.log(res.data)
             setViewCommentA(res.data)
@@ -108,14 +108,14 @@ const Feed = ({match, isFeed,isArtist}) => {
     //댓글 삭제
     const deleteOn = async(e)=>{
         const num = e.target.id
-        await axios.post(`http://localhost:5000/artist/comment/${match.params.name}/delete`,{ num : num }).then(res=>{
+        await axios.post(`http://172.31.3.72/artist/comment/${match.params.name}/delete`,{ num : num }).then(res=>{
             console.log(res.data)    
             setViewComment(res.data)
         })
     }
     const deleteOnA = async(e)=>{
         const num = e.target.id
-        await axios.post(`http://localhost:5000/artist/comment/${match.params.name}/delete`,{ num : num }).then(res=>{
+        await axios.post(`http://172.31.3.72/artist/comment/${match.params.name}/delete`,{ num : num }).then(res=>{
             console.log(res.data)    
             setViewCommentA(res.data)
         })
@@ -134,7 +134,7 @@ const Feed = ({match, isFeed,isArtist}) => {
         if (e.key === "Enter") {
             const num = e.target.id;
             setIsTrue(!isTrue);
-            await axios.post(`http://localhost:5000/artist/comment/${match.params.name}/edit`,{comment, num : num }).then(res=>{
+            await axios.post(`http://172.31.3.72/artist/comment/${match.params.name}/edit`,{comment, num : num }).then(res=>{
                     setViewComment(res.data)
         })
         }
@@ -143,7 +143,7 @@ const Feed = ({match, isFeed,isArtist}) => {
         if (e.key === "Enter") {
             const num = e.target.id;
             setIsTrue(!isTrue);
-            await axios.post(`http://localhost:5000/artist/comment/${match.params.name}/edit`,{comment, num : num }).then(res=>{
+            await axios.post(`http://172.31.3.72/artist/comment/${match.params.name}/edit`,{comment, num : num }).then(res=>{
                     setViewCommentA(res.data)
         })
         }
@@ -162,7 +162,7 @@ const Feed = ({match, isFeed,isArtist}) => {
     useEffect(()=>{
         console.log('useEffect')
         const getFeed = async ()=>{
-            await axios.get(`http://localhost:5000/artist/posts/${match.params.name}`) //package.json 밑에 (proxy:주소) 넣어주면 경로에 서버주소 안 넣어도 됨
+            await axios.get(`http://172.31.3.72/artist/posts/${match.params.name}`) //package.json 밑에 (proxy:주소) 넣어주면 경로에 서버주소 안 넣어도 됨
             .then(res=>{
                 //내림차순 정렬
                 const desc= res.data
@@ -174,7 +174,7 @@ const Feed = ({match, isFeed,isArtist}) => {
         };  
 
         const getComment = async ()=>{
-            await axios.get(`http://localhost:5000/artist/comment/${match.params.name}`)
+            await axios.get(`http://172.31.3.72/artist/comment/${match.params.name}`)
             .then(res=>{
                 console.log(res.data)
                 setViewComment(res.data)
@@ -182,18 +182,18 @@ const Feed = ({match, isFeed,isArtist}) => {
             })
         }
         const getArtistComment = async ()=>{
-            await axios.get(`http://localhost:5000/artist/comment/artistfeed/${match.params.name}`)
+            await axios.get(`http://172.31.3.72/artist/comment/artistfeed/${match.params.name}`)
             .then(res=>{
                 setViewCommentA(res.data)
         })
         }
 
         const getUser = async ()=>{
-            await axios.get(`http://localhost:5000/mypage/${sessionStorage.user_id}`).then(res=>setUser(res.data))
+            await axios.get(`http://172.31.3.72/mypage/${sessionStorage.user_id}`).then(res=>setUser(res.data))
         }
         
         const getArtistContent = async()=>{
-            await axios.get(`http://localhost:5000/artist/Aposts/${match.params.name}`)
+            await axios.get(`http://172.31.3.72/artist/Aposts/${match.params.name}`)
             .then(res=>{
             const descA= res.data
             descA.sort((data, nextdata )=> {
