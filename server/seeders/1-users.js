@@ -56,7 +56,7 @@ module.exports = {
         userTel: "010-4561-2876",
         userMail: "kakao@naver.com",
         userAddr: "서울시 강남구 서초동",
-        userImg: "https://cdn.ppomppu.co.kr/zboard/data3/2020/1011/20201011222743_lindqurz.jpg",
+        userImg: "https://pbs.twimg.com/profile_images/1169070430583283712/oTJrXisj_400x400.jpg",
         role: "user",
         provider: "local"
     };

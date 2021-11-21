@@ -19,17 +19,18 @@ const Feed = ({match, isFeed,isArtist}) => {
     
     //-----------------
     const [page, setPage] = useState(1)
-    const [initNum, setInitNum]= useState(0)
+    const [initNum, setInitNum]= useState(5)
     const [loading, setLoading] = useState(true)
     const [ref, inView] = useInView()
     
     const [pageA, setPageA] = useState(1)
-    const [initNumA, setInitNumA]= useState(0)
+    const [initNumA, setInitNumA]= useState(5)
     const [loadingA, setLoadingA] = useState(true)
     const [refA, inViewA] = useInView()
     //--------------------
 
     const [commentnum,setCommentNum] = useState(null)
+
     //--------------------
      // 서버에서 아이템을 가지고 오는 함수
   const getItems = useCallback(async () => {
@@ -87,7 +88,7 @@ useEffect(() => {
   }, [getItemsA])
 
   useEffect(() => {
-    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    // 사용자가 타겟 요소를 보고 있고, 로딩값 트루일 떄
     if (inViewA && loadingA) {
       setPageA(prevState => prevState + 1)
       setInitNumA(initNumA+5)
@@ -273,7 +274,7 @@ useEffect(() => {
         const getArtistContent = async()=>{
             await axios.get(`http://localhost:5000/artist/Aposts/${match.params.name}`)
             .then(res=>{
-            setViewContentA(res.data)
+            setViewContentA(res.data.slice(0,5))
         }).catch(err=>console.log(err))}
         getFeed();
         getComment();
@@ -312,7 +313,7 @@ useEffect(() => {
                                             </div>
                                             {getUser.userId ===data.userId &&
                                             <div>
-                                                <button id={data.feedNum} type="button" onClick={deleteFeed}>삭제</button>
+                                                <button className="min-btn" id={data.feedNum} type="button" onClick={deleteFeed}>삭제</button>
                                             </div>}
                                         </div>
                                         <div className='feed-content'>
@@ -337,8 +338,8 @@ useEffect(() => {
                                                     </div>
                                                     {getUser.userId ===data1.userId &&
                                                     <div className='button'>
-                                                        <button id={data1.commentNum} type="button" onClick={()=>editOn(data1)}>수정</button>
-                                                        <button id={data1.commentNum} type="button" onClick={(e)=>deleteOn(e)}>삭제</button>
+                                                        <button className="min-btn" id={data1.commentNum} type="button" onClick={()=>editOn(data1)}>수정</button>
+                                                        <button className="min-btn" id={data1.commentNum} type="button" onClick={(e)=>deleteOn(e)}>삭제</button>
                                                         <span></span>
                                                     </div>
                                                     }
@@ -386,10 +387,10 @@ useEffect(() => {
                     <div>
                         <form method='POST' onSubmit={ArtistPostWrite}>
                             <div className="feed-input-box-art">
-                                <h5>CL님의 공간</h5>
+                                <h5>✨ {viewContentA[0].artistName} 님의 피드 ✨</h5>
                                 <textarea className="textarea-art" type="text" value={content} aria-label="empty textarea" placeholder="메세지를 입력해주세요" onChange={ChangePostContent} style={{ width: 550,height: 150 }}/>
                                 <label htmlFor="input-file" className="OOTDwrite-input-file" onChange={addImage}>
-                                    <div>addaddd</div>
+                                    <div className='img-input'>이미지 올리기</div>
                                     <input type="file" mulitple="multiple" id="input-file" style={{display:"none"}} accept=".jpg,.jpeg,.png" />
                                 </label>
                                 <input type='submit' value='피드 생성하기' style={{border:"none" }} />
@@ -408,7 +409,7 @@ useEffect(() => {
                                         </div>
                                         {getUser.userId ===data.userId &&
                                         <div>
-                                            <button id={data.artistFeedNum} type="button" onClick={deleteFeedA}>삭제</button>
+                                            <button id={data.artistFeedNum} className="min-btn-a" type="button" onClick={deleteFeedA}>삭제</button>
                                         </div>}
                                     </div> 
                                     {data.artistfeedImg &&  <img src={data.artistfeedImg} alt="d" />}
@@ -430,16 +431,15 @@ useEffect(() => {
                                             <li className="comment-content">
                                                 <div  className='id'>
                                                     <div>
-                                                    {data1.userId} 
-
+                                                        {data1.userId} 
                                                     </div>
-                                                    <span>{data1.commentContent}</span>
+                                                    <div className="commentnum">{data1.commentContent}</div>
                                                 </div>
                                                 <div style={{fontSize:13,float:"right"}}>{new Date(data1.commentCreated).toLocaleDateString()}</div>
                                                 {getUser.userId ===data1.userId &&
                                                 <div className='feed-button'>
-                                                    <button type="button" onClick={() => editOn(data1)}>수정</button>
-                                                    <button id={data1.commentNum} type="button" onClick={(e)=>deleteOnA(e)}>삭제</button>
+                                                    <button className="min-btn-a" type="button" onClick={() => editOn(data1)}>수정</button>
+                                                    <button className="min-btn-a" id={data1.commentNum} type="button" onClick={(e)=>deleteOnA(e)}>삭제</button>
                                                 </div>}
                                             </li>
                                                 {commentnum === data1.commentNum && 
@@ -451,8 +451,8 @@ useEffect(() => {
                                             }
                                         })}
                                         <li>
-                                            <textarea style={{marginTop:10}} onChange={handleComment}  id="comment" cols="52" rows="2"></textarea>
-                                            <input id={Number(data.artistFeedNum)} className="commentcreatebtn" type="button" value="댓글등록" onClick={addArtistComment}/>
+                                            <textarea style={{marginTop:15}} onChange={handleComment}  id="comment" cols="52" rows="1"></textarea>
+                                            <input  id={Number(data.artistFeedNum)} className="commentcreatebtn" type="button" value="댓글등록" onClick={addArtistComment}/>
                                         </li>
                                     </ul>
                                 </div>

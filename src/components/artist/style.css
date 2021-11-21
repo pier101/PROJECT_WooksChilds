@@ -34,7 +34,7 @@
     color: #fff;
     font-size: 19px;
     font-weight: 600;
-    box-shadow: 0px 1px 1px 1px #9a67ea;
+    box-shadow: 0px 1px 1px 1px #9966ea;
     margin-left: 35%;
 }
 .artistInfo-box div button:hover{
@@ -68,7 +68,7 @@
 .feed-input-box input{
     color: #fff;
     font-weight: 550;
-    background-color: rgb(167, 102, 173);
+    background-color: hsl(295, 30%, 54%);
 }
 .feed-input-box input:hover{
     color: #fff;
@@ -159,6 +159,7 @@ textarea{
 .comment-content .id{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     font-weight: 650;
 }
 .comment-content span{
@@ -172,9 +173,30 @@ textarea{
 .comment-content div button{
     margin-right: 10px;
 }
-
-
-
+.commentnum{
+    margin-left: 10px;
+}
+.commentcreatebtn{
+    width: 65px;
+    height: 30px;
+    font-size: 13px;
+    text-align: center;
+    border: none;
+    font-weight: 600;
+    background-color: #d6d2d2;
+}
+.min-btn{
+    border-radius: 10px;
+    background-color: #d6d2d2 ;
+    font-weight: 600;
+    border: none;
+}
+.min-btn-a{
+    border-radius: 10px;
+    background-color: #d6d2d2 ;
+    font-weight: 600;
+    border: none;
+}
 /* 이미지 */
 .OOTDwrite-input-file{
     margin-top: 10px;
@@ -215,7 +237,7 @@ textarea{
 }
 .feed-input-box-art h5{
     text-align: center;
-    font-weight: bold
+    font-weight: bold;
 }
 .feed-input-box-art input{
     color: #fff;
@@ -227,8 +249,12 @@ textarea{
     background-color: rgb(72, 153, 119);
 }
 
-
+.feed-input-box-art .img-input{
+    width: 100%;
+    text-align: center;
+    height: 5px;
+}
 .textarea-art{
-    border: 3px solid  rgb(87, 206, 147);
+    border: 3px solid  #4dc252;
     border-radius: 5% 5% 0px 0px;
 }

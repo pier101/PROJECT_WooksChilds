@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useContext} from "react";
+import {ArtistCardContext} from "../store/artistContext"
 import {AppBar,Box,Toolbar,IconButton,Typography,Badge,MenuItem,Menu} from '@mui/material';
 import {Link} from 'react-router-dom'
 
@@ -18,6 +19,10 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 
 export default function AppBar1(props) {
+
+  //컨텍스트 사용하기
+  const context = useContext(ArtistCardContext)
+
   const isLogin = props.isLogin
   console.log(isLogin)
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -65,7 +70,7 @@ export default function AppBar1(props) {
       onClose={handleMenuClose}
     >
         <MenuItem onClick={handleMenuClose}><Link to={`/mypage/${sessionStorage.user_id}`} className='nav-link'>마이 페이지</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link to={`/admin`} className='nav-link'>관리자 공간</Link></MenuItem>
     </Menu>
   );
   // const renderMenuX = (
@@ -191,7 +196,7 @@ export default function AppBar1(props) {
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Notifications{context.artistName}</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -241,28 +246,39 @@ const list = (anchor) => (
     onKeyDown={toggleDrawer(anchor, false)}
   >
     <List sx={{mt:10}}>
-        <h5 > 가입한 서비스</h5>
-      {['가입한연애인 이름', '연애인이름2', '연이3', '연이4'].map((text, index) => (
-        <ListItem  button key={text}>
+        <h5 > 바로가기</h5>
+        <Link to='/shop' style={{color:"black",textDecoration:"none"}}>
+        <ListItem >
           <ListItemIcon>
-             
-             <InboxIcon />  {/* <div>연애인마크이미지</div> */}
+             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary={text} />
+          <h5 style={{marginLeft:5}}>SHOP</h5>
         </ListItem>
-      ))}
+        </Link>
+        <Link to='/board' style={{color:"black",textDecoration:"none"}}>
+        <ListItem >
+          <ListItemIcon>
+             <InboxIcon />
+          </ListItemIcon>
+          <h5 style={{marginLeft:5}}>Notice</h5>
+        </ListItem>
+        </Link>
     </List>
     <Divider sx={{m:2}}/>
     
     <List>
-    <h5 > 가입안한 서비스</h5>
-      {['안가연애1', '안가연애2', '안가연애3'].map((text, index) => (
-        <ListItem button key={text}>
+    <h5 >가입한 가수들</h5>
+      {context && context.map((artist, index) => (
+        <Link to={`/artist/${artist.artistName}`} style={{color:"black",textDecoration:"none"}}>
+        <ListItem button key={index}>
           <ListItemIcon>
-             <MailIcon />  {/* <div>연애인마크이미지</div> */}
+              <div>
+                <img style={{width:50,height:50, borderRadius:50}} src={artist.artistCardImg} alt="가수이미지"></img>
+              </div>
           </ListItemIcon>
-          <ListItemText primary={text} />
+          <h5 style={{marginLeft:5}}>{artist.artistName}</h5>
         </ListItem>
+        </Link>
       ))}
     </List>
   </Box>

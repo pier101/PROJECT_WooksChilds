@@ -68,7 +68,7 @@ app.use(express.urlencoded({
 app.get('/artistCard', async (req, res, next) => {
   try {
         console.log("왔다")
-      res.send( await Artistcards.findAll() );
+      res.json( await Artistcards.findAll() );
   } catch (err) {
       next(err);
   }

@@ -2,10 +2,10 @@ import React,{useState,useEffect} from 'react'
 import {Box,Avatar,Checkbox} from '@mui/material';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
+// import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+// import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {Carousel} from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import axios from 'axios'
 import {useHistory} from "react-router";
 
@@ -17,7 +17,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
     const  [goodsCard,setGoodsCard] = useState([]);
     //로딩시 카드불러올꺼임
     useEffect(()=>{  
-             axios.get(`http://localhost:5000/goodsCard`)
+            axios.get(`http://localhost:5000/goodsCard`)
             .then( (res)=>{setGoodsCard(res.data)})
         },[])
 
@@ -54,7 +54,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
     userId:'',
     });
     //주문번호
-   
+
 
     const Submit = (e) => {
     content.buy_total = e.goodsPrice
@@ -64,19 +64,18 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
     content.goodsNum = e.goodsNum
     content.userId = sessionStorage.user_id
         
-      history.push({
+    history.push({
         pathname: `/GoodsInfo/${content.goodsNum}`,
         state: {content: content},
     });
     console.log(history)
     }   
-   
     
     return (
         <>
            
                 <Box sx={{}}>
-                    <Box sx={{ pt:'8%', pb:'5%',fontWeight: 'bold',textAlign: 'center',color:'#06e19a',fontSize:100, }}>GOOODS SHOP</Box>
+                    <Box sx={{ pt:'5%', pb:'4%',fontWeight: 'bold',textAlign: 'center',color:'#06e19a',fontSize:100, }}>GOOODS SHOP</Box>
                         <Box sx={{ bgcolor:'#06e19a',fontWeight: 'bold',textAlign: 'center',color:'#06e19a', }}>
                             <Box sx={{mx:'10%'}}>
                         
@@ -94,7 +93,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
                                 </Carousel.Caption>
                             </Carousel.Item> 
 
-                            <Carousel.Item  style={{ height: '600px'}} onClick={()=>{console.log('경로설정')}}>
+                            <Carousel.Item  style={{ height: '550px'}} onClick={()=>{console.log('경로설정')}}>
                                 <Carousel.Caption >
                                     <Box sx={{ml:8, textAlign:'center',color:'white',fontSize:50,display:'flex' }}> 
                                             <br/><br/><br/>여기가 다른데보다 전나싸여<br/>다른데 절대가지마요
@@ -118,35 +117,30 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
                                 </Carousel.Caption>
                             </Carousel.Item> 
                         </Carousel>
-                         </Box>
-                         </Box>
+                        </Box>
+                        </Box>
 {/* ///////////////////////////////////// */}
                     {/* 상품검색만들어보자 */}
 
                     {/* 가수 별 상품나열 */}
 
                     <Box sx={{ pt:'10%',fontWeight: 'bold',textAlign: 'center',color:'#06e19a',fontSize:70, }}>구경 가자가자 가자고!</Box>
-                    <Box sx={{ mt:5, mx:'15%', fontWeight: 'bold',textAlign: 'center',display: 'flex',  flexWrap: 'wrap',justifyContent: 'center', }}>
-                 
-                    {goodsCard.map((a,i)=>{ return(
-                        
+                    <Box sx={{ mt:20, mx:'15%', fontWeight: 'bold',textAlign: 'center',display: 'flex',  flexWrap: 'wrap',justifyContent: 'center', }}>
+                    {goodsCard && goodsCard.map((a,i)=>{ return(
                         <Box key={i}>
                             <Box type="button"  className='nav-link' onClick={()=>{Submit(a)}}>
                             <Avatar
                             alt="Remy Sharp"
                             variant="square"
                             src={a.ArtistCard.artistCardImg}
-                            sx={{  borderRadius: 10 ,width: 200, height: 200, textAlign: 'center',  }}
+                            sx={{  borderRadius: 10  ,width: 250, height: 250, textAlign: 'center',  }}
                             /></Box>
-                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'space-between', }}>{a.goodsName}
-                                <Checkbox {...label} 
-                                    sx={{color: pink[1000],'&.Mui-checked': {color: pink[300],},}} icon={<FavoriteBorder />} checkedIcon={<Favorite />} /> 
+                            <Box sx={{ml:3,display:'flex', fontSize:27, fontWeight:'bold',justifyContent: 'center', }}>{a.goodsName}
                             </Box>
                         </Box>
                     )})} 
-                      
-                        
                     </Box>
+                        <Box sx={{ mt:30}}></Box>
                 </Box>
         </>
     )

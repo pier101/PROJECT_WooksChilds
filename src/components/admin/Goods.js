@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Box,Paper,TextField,Button,InputLabel,MenuItem,FormControl,Select     } from '@mui/material';
+import {Box,Paper,TextField,Button,MenuItem,FormControl,Select     } from '@mui/material';
 import axios from 'axios';
 
 export default function Goods() {
@@ -27,7 +27,7 @@ const  [artistCard,setArtistCard] = useState([]);
             e.preventDefault();
             console.log("goods")
         
-        if(Content.goodsName.length<7){
+        if(Content.goodsName.length<11){
         const res = await axios.post(`http://localhost:5000/admin/goods`,{Content});
         const check = res.data.data
             if(check===true) {
@@ -40,7 +40,7 @@ const  [artistCard,setArtistCard] = useState([]);
 
             }
         }else{
-            alert(`굿즈이름 6글자이내로 작성하세요`);
+            alert(`굿즈이름 10글자이내로 작성하세요`);
 
         }
     }    

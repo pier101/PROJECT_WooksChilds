@@ -17,9 +17,12 @@ import { Board} from "./page/index";
 import Admin from "./components/admin";
 import Searchpw from "./components/Login/Searchpw";
 import FindIdPw from "./components/Login/findIdPw";
+import ArtistStore from "./store/artistContext"
+
 
 
 const App = ({match}) => {
+
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
@@ -35,7 +38,7 @@ const App = ({match}) => {
   //로그인 되있을떄
   if (isLogin) {
     return (
-      <>
+      <ArtistStore>
         <AppBar1 isLogin={isLogin} />
         <Route  path="/" component={Main} match={match} exact />
         <Route  path="/artist/:name"  component={Menu} exact/>
@@ -43,7 +46,8 @@ const App = ({match}) => {
         <Route path="/Shop" component={Shop} exact/> 
         <Route path='/Admin' component={Admin} exact />
         <Route path="/GoodsInfo/:num" component={GoodsInfo} exact/> 
-      </>
+        <Route path='/Payment' component={Payment} exact /> 
+      </ArtistStore>
     );
   } 
   // else {
@@ -56,7 +60,7 @@ const App = ({match}) => {
   //로그인 안되있을떄
   if(!isLogin){
     return (
-        <>
+        <ArtistStore>
           <AppBar1 isLogin={isLogin} />
           <Route  path="/" component={Main} match={match} exact />
           <Route  path="/login"  component={Login} exact />
@@ -72,7 +76,7 @@ const App = ({match}) => {
           <Route path='/Admin' component={Admin} exact />
           <Route path="/GoodsInfo/:num" component={GoodsInfo} exact/> 
           <Board/>
-      </>
+      </ArtistStore>
     );
   }
 

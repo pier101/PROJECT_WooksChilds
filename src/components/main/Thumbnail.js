@@ -1,31 +1,23 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Box } from '@mui/system';
-import {Link,Route } from 'react-router-dom'
-import axios from 'axios'
+import {Link } from 'react-router-dom'
+import {ArtistCardContext} from "../../store/artistContext"
 
 export default function Artists() {
-    const  [artistCard,setArtistCard] = useState([]);
+    const context = useContext(ArtistCardContext)
     //로딩시 카드불러올꺼임
-    useEffect(()=>{  
-      console.log('뭐여')
-             axios.get(`http://localhost:5000/artistCard`)
-            .then( (res)=>{
-              console.log(res.data)
-              setArtistCard(res.data)})
-        },[])
-
 
     return (
       <>
               <Box sx={{mt: 15, mx: "10%"  ,display: 'flex',  flexWrap: 'wrap', justifyContent: 'center' ,}}>
-            { artistCard.map((a,i)=>{
+            {context&& context.map((a,i)=>{
                         return(
-                          <Link to={`/artist/${a.artistName}`} value={a.artistName} > 
+                          <Link to={`/artist/${a.artistName}`} value={a.artistName} style={{color:"black",textDecoration:"none"}} > 
                             <Card  key={i} onClick={()=>{  console.log(  "이동처리하셈" )}} sx={{ maxWidth: 280, m:1 }}>
                                 <CardActionArea>
                                   <CardMedia

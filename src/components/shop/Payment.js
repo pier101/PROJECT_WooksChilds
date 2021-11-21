@@ -361,4 +361,3 @@ import {authenticate} from "./common/authenticate";
 }
 
 export default Payment;
-
