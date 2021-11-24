@@ -1,4 +1,5 @@
-# Product Name
+# weverse
+
 > Short blurb about what your product does.
 
 [![NPM Version][npm-image]][npm-url]
@@ -27,6 +28,7 @@ edit autoexec.bat
 
 A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
 
+
 _For more examples and usage, please refer to the [Wiki][wiki]._
 
 ## Development setup
@@ -53,11 +55,11 @@ npm test
 * 0.0.1
     * Work in progress
 
-## Meta
+## 발생이슈 & 해결 방법
 
 Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
+Distributed under the XYZ license. See ``LICENSE``  for more information.
 
 [https://github.com/yourname/github-link](https://github.com/dbader/)
 
