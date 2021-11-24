@@ -1,4 +1,4 @@
-# weverse
+# 
 
 > Short blurb about what your product does.
 
@@ -55,7 +55,8 @@ npm test
 * 0.0.1
     * Work in progress
 
-## 발생이슈 & 해결 방법
+## 발생이슈 & 해결 방![무한스크롤 시연](https://user-images.githubusercontent.com/85658044/143192695-3c80cde2-c054-4501-9ae9-02cd441f5836.gif)
+법
 
 Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
 
