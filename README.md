@@ -55,8 +55,17 @@ npm test
 * 0.0.1
     * Work in progress
 
-## 발생이슈 & 해결 방![무한스크롤 시연](https://user-images.githubusercontent.com/85658044/143192695-3c80cde2-c054-4501-9ae9-02cd441f5836.gif)
-법
+## 발생이슈 & 해결 과정
+---
+#### 무한스크롤 구현시 함수 무한 루프 발생
+문제 : 
+
+#### 피드 게시물 내 댓글 수정시 게시물 내 모든 댓글창 활성화
+문제 : 
+
+
+
+
 
 Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
 
