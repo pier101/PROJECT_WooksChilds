@@ -1,70 +1,240 @@
-# Getting Started with Create React App
+프로젝트팀명 : BUYMESUSHI
+👜👢🧢3E('') - 주제 미정
+프로젝트 시작일 : 2021-11-13
+👜👢🧢[서비스로 이동](http://주소 미정/)
+p.s. 현재 서버를 닫은 관계로 실행이 되지 않습니다
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+--
+스크린샷 2021-10-15 오후 3 51 02
 
-## Available Scripts
+Member.
 
-In the project directory, you can run:
+이성재:깃허브 최현석:깃허브
+김혜린:깃허브
+이소윤:깃허브
 
-### `yarn start`
+목차
+1.개요
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2.목적
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+기존 서비스와의 차별점
+3.전체 소스 코드
 
-### `yarn test`
+4.사용한 기술
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5.주요 기능
 
-### `yarn build`
+6.발생한 이슈 & 해결 방법
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+7.상세 설명
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+DB 구조 (ERD)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+전체 흐름도
 
-### `yarn eject`
+프로젝트 설명 PPT
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+8.시연 영상
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+9.참여인원
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+개요
+패션 커뮤니티 활성화를 위한 쇼핑몰 구성
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+목적
+패션 커뮤니티 활성화를 위한 쇼핑몰 구성
 
-## Learn More
+커뮤니티 활성화
+프로젝트 경험
+결제서비스 구현 숙달
+기존 서비스와의 차별점
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+소켓 I.O 를 활용한 실시간 채팅
+커뮤니티 서비스 제공
+자체 할인율 적용 결제서비스 연동(솔루션)
+전체 소스 코드 소스
+사용한 기술
+웹 화면 구성 : HTML5 CSS3 bootstrap JavaScript``Scss``React
+검색 결과 데이터 요청 및 출력 : jQuery Ajax JSON``axios
+DB 액션 처리 : Mongoose
+DBMS : MongoDB
+개발 Tool :PostMan``Visual Studio Code Atom
+AWS 배포 : EC2 ``
+로그인 Api : KakaoTalk API
+채팅 Api : Gitpull
+프레임워크 : NodeJs
+결제: Bootpay
+프로젝트 관리 Tool : Google Drive GitHub
+사용 모듈(v) : "axios": "^0.22.0", "bcrypt": "^5.0.1", "bootpay-js": "^3.3.3", "cookie-parser": "^1.4.5", "dotenv": "^10.0.0", "express": "^4.17.1", "express-session": "^1.17.2", "moment": "^2.29.1", "morgan": "^1.10.0", "multer": "^1.4.3", "mysql": "^2.18.1", "mysql2": "^2.3.0", "nodemon": "^2.0.13", "nunjucks": "^3.2.3", "passport": "^0.5.0", "passport-kakao": "^1.0.1", "passport-local": "^1.0.0", "sequelize": "^6.6.5", "sequelize-cli": "^6.2.0", "socket.io": "^4.2.0"
+주요 기능
+로그인 : 일반 로그인, 카카오 로그인 Sequelize``passport``mysql
+회원가입 : Sequelize passport``mysql
+회원정보변경 :Sequelize``mysql
+장바구니 : Sequelize``mysql
+결제 : Sequelize passport``Bootpay
+마이페이지 : Sequelize``mysql
+게시판 :Sequelize``mysql
+1:1 채팅 : 관리자 대화 gitpull(api)
+실시간채팅:socket.io``rg.rok
+검색 :Sequelize``mysql
+관리자모드(상품등록 및 삭제) : Sequelize``mysql
+발생한 이슈 & 해결 방법
+"Nodejs 처리에서의 문제점 파악 ,db및 구조설계 "
+Nunjucks 템플릿 엔진 사용에 미숙으로 인한 에러발생
+[상황] nunjucks 동적인 처리 미숙으로 인해 템플릿 에러발생
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[문제] nunjucks 동적인 처리 미숙으로 인해 템플릿 에러발생
 
-### Code Splitting
+[해결] public파일 생성후 에러 해결
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+nunjucks for문 구현 시 화면에 구현 장애
+[상황] 장바구니 구현시 nunjucks 활용
 
-### Analyzing the Bundle Size
+[문제] for문 과 mysql 관계 설정 미숙으로 인해 화면에 렌더링이 안댐
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[해결] nunjucks 와 관게쿼리 해결 완료 로 인해 문제해결
 
-### Making a Progressive Web App
+라우트 get,post,CRUD 메서드 연결 구현 이해부족
+[상황] 게시물,장바구니,상품등록,회원가입 구현에 있어서 에러발생
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[문제] 게시물,장바구니,상품등록등 등 관계쿼리 사용부분에 있어서 CRUD에 대한 이해부족으로 인해 장애발생
 
-### Advanced Configuration
+[해결] 추가적인 학습과 관계쿼리 추가로 이해하면서 보안하여 장애 해결
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Git 브랜치 활용 미숙
+[상황] 코드 병합
 
-### Deployment
+[문제] 각자 코드 작성 한것에 대한 코드 병합시 에러발생 (코드 병합시 코드 삭제댐)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+[해결] 분업화 및 소통활성화 후에 코드 병합시 순차적으로 병합
 
-### `yarn build` fails to minify
+Nunjucks css,js코드먹통
+[상황] 코드 가 스크립트,링크로 경로를지정해줘도 코드가먹지않는현상
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[문제] 동적인파일이먹는곳은 메인,레이아웃등 헤더, 코드가 연결이되는데 그외에 인크루드방식으로 사용하는 html은 코드가 먹통이되는현상이생김
+
+[해결] 인크루드방식코드는 html파일자체에 css,js를 작성했음
+
+  - 코드먹통으로인한 SASS사용
+
+  [상황] 링크,스크립트경로지정이안되어 SCSS 컴파일한 CSS 동적인요소언어들이 먹지않는현상
+
+  [문제] 어떻게든 스크립트형식이나 링크를 해결할려고했으나 구글링을해도 넌적스에대한 관련대체방안들이 너무적어서 참고할요소가 없어서 SCSS를 포기해야되는지 고민
+
+  [해결] SCSS파일을 CSS로 컴파일후 겹치는 CSS요소가있는지 각파일마다 확인후 자체적으로 따로 HTML파일안에 스타일을 지정해줌으로써 해결
+Socket.io 의 ngrock 서버문제
+[상황] ngrock의 문제
+
+[문제] ngrock 이 최대 3명만가능해서 채팅기능이 3명이상 채팅이불가능했던 문제
+
+[해결] ec2서버를열때 rgrock 을 사용하지않고 소켓을 자체적으로 서버를 열어서 인크루드방식으로 바꿈으로서 대량의인원도 문제없도록 해결함
+
+"게시판 CRUD 기능에서의 라우팅과 db관계설정"
+두 테이블간의 관계 핸들링 미숙
+[상황] 게시글을 작성한 유저의 nick 값을 작성자 란에 넣지 못함
+
+[문제] 해당 페이지로 데이터를 보냄과 nunjucks 문으로 그 값을 불러오는데 있어 미숙
+
+[해결] 라우터에서 정보를 get할 때 User model에서 nick을 attributes에 추가해주고 nunjucks 문에서는 board의 User 모델을 불러옴
+
+조회수 ++ 선언과 할당에 대한 이슈
+[상황] 특정 게시물을 눌렀을 때 조회수(viewcount column)값을 올리지 못함
+
+[문제] 렌더링/선언과 할당에 대한 이해 부족
+
+[해결] 해당 게시물이 렌더링 되기 전에 선택된 그 글의 viewcount에 1을 더한값을 할당해 보여줌
+
+"NodeJs ,Socket.IO 를 통해 실시간 통신을 구현"
+실시간 채팅 구현
+[상황] 사용자들끼리 실시간 쇼핑관련 소통을하기위한 채팅
+
+[문제] socket.io서버 를 코드에 추가할 떄 오류 발생
+
+[해결] 서버의 순서도를 재배치 함으로써 문제 해결
+
+socket.id와 idx
+[상황] 특정 사용자에게 메세지를 보내려면 해당 사용자의 socket.id를 알아야 함
+
+[문제] socket.id는 브라우저를 킬 때마다 새롭게 생성됨, 고유한 key가 되지 못함
+
+[해결] 해당 회원을 식별할 수 있는 idx 값을 활용: idx값을 속성이름으로 추가, 그 속성의 값은 소켓의 ID값으로 할당함
+
+connected
+[상황] 'ooo님이 채팅방에 입장/퇴장 하셨습니다' 기능을 추가해야함
+
+[문제] 시간 부족으로 인해 미완성
+
+[해결] 나중에 보안 할 예정
+
+**NodeJs socket.io 깨달은 점 **
+
+실시간 사용자들끼리의 채팅이기에 socket.id를 사용하는 1:1 채팅을 구현했음. socket.io 특성 상 사용자 지정에 대한 이해도 숙지
+
+AWS 활용(EC2, RDS)
+34
+
+35
+
+36
+
+데이터베이스 AWS EC2방식 체택 인스턴스 생성후 키값생성 후 서버 연결 41 42 43 44
+
+데이터베이스 AWS EC2방식 체택 인스턴스 생성후 키값생성 후 서버 연결
+
+AWS의 RDS로 데이터베이스를 공유하여 협업하여 프로젝트를 진행하였고 AWS의 EC2를 활용하여 배포를 하였습니다
+
+서버 연결하기 전 SCREEN을 활용 cmd창을 닫거나 컴퓨터를 종료하여도 서버가 계속 돌아가게 유지했습니다
+
+상세 설명
+전체 코드 : 코드
+
+- 폴더 설명
+views : html(Nunjucks)
+video : video files(front 영상)
+vendor : cdn파일(scss, jQuery 모음)
+uploads : img파일(게시글 등록, 상품 등록 시 자동생성되어 이미지를url로 mySQL DB에 저장)
+routes : 페이지별 라우트 생성(CRUD, sequelize)
+public : front 동적(css, js, img)
+profileimg : img파일(회원가입 시 자동생성되어 이미지를url로 mySQL DB에 저장)
+passport : 로그인 관리
+node_modeules
+models : DB 테이블 생성(sequelize, 관계도 형성)
+imgages/icons : favicon파일
+fonts : 다운받은 폰트 모음
+config : AWS RDS 연동
+서버(app.js) : 코드 -> 각 페이지별 라우터 설정, passport 6002번, express 모듈로 넌적스를 http로 연결
+
+페이지별 설명(views-html)
+board : board, boarddetail, boardwrite, boardedit
+61
+
+게시판의 첫 페이지로 게시글 번호는 AUTO INCREMENT되는 게시글의 id로 나타나고 작성자에는 해당 게시글을 작성한 유저의 닉네임이 표시된다.
+62
+
+글 작성 버튼을 누르면 넘어가는 페이지로 제목과 내용과 사진을 업로드할 수 있고 제출버튼을 누르면 게시글이 DB에 저장되어 board게시판에 보여진다.
+63
+
+방금 작성한 게시글이 닉네임과 함께 등록된 모습이다.
+64
+
+게시글의 제목을 누르면 해당 글을 더 자세히 볼 수 있는데 조회수는 해당 페이지로 렌더링되기 전에 게시글의 viewcount가 1 올라간다.
+55
+
+자기가 쓴 글에는 유저Nick과 해당 게시글의 Nick이 같기 때문에 수정과 삭제 버튼이 생긴다. 삭제를 하게 되면 DB에서 해당글이 사라진다.
+65
+
+수정을 하면 제목과 내용은 value를 가져와서 그대로 뜬 상태에서 글을 수정할 수 있게 되어있고 위와 같이 수정이 된다.
+66
+
+수정을 하면 위와 같이 수정된 내용이 게시글에 다시 표시가 된다.
+DB구조 (ERD)
+KakaoTalk_Photo_2021-10-17-15-22-45
+
+프로젝트 기획안 PPT
+구글 프레젠테이션 파일
+
+시연 영상
+유튜브첫페이지 전반적인 틀,index 영상
+유튜브시연영상1
+유튜브시연영상2
