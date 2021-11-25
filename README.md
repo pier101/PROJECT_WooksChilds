@@ -29,9 +29,9 @@ DB 액션 처리 : Sequelize
 
 DBMS : MySQL 
 
-개발 Tool :Visual Studio Code``github
+개발 Tool : Visual Studio Code github
 
-로그인 구현 : REACT
+로그인 구현 : `REACT`
 
 프레임워크 : NodeJs REACT
 
@@ -39,7 +39,7 @@ DBMS : MySQL
 
 프로젝트 관리 Tool : Google Drive GitHub notion
 
-사용 모듈(Client) : `
+사용 모듈(Client) : 
 
     "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.5.0",
