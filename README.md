@@ -35,7 +35,7 @@ DBMS : MySQL
 
 프레임워크 : NodeJs REACT
 
-결제: PAYPLE
+결제: [PAYPLE](https://www.payple.kr/) 
 
 프로젝트 관리 Tool : Google Drive GitHub notion
 
