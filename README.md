@@ -23,21 +23,21 @@
 # 3. 전체 소스코드
 
 # 4. 사용기술
-웹 화면 구성 : REACT
+웹 화면 구성 : `REACT`
 
-DB 액션 처리 : Sequelize
+DB 액션 처리 : `Sequelize`
 
-DBMS : MySQL 
+DBMS : `MySQL` 
 
-개발 Tool : Visual Studio Code github
+개발 Tool : `Visual Studio Code` `github`
 
 로그인 구현 : `REACT`
 
-프레임워크 : NodeJs REACT
+프레임워크 : `NodeJs` `REACT`
 
 결제: [PAYPLE](https://www.payple.kr/) 
 
-프로젝트 관리 Tool : Google Drive GitHub notion
+프로젝트 관리 Tool : `Google Drive` `GitHub` `Notion`
 
 사용 모듈(Client) : 
 
