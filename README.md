@@ -1,4 +1,4 @@
-# 프로젝트 명 : 욱버스 💕
+# 프로젝트 명 : 욱버스 (UKVERSE)
 ## 프로젝트 목표 : 팬과 아티스트를 위한 프라이빗 커뮤니티 플랫폼 개발
 ## 팀원 소개🧐
 😎팀장 : 김동욱 - [깃허브](https://github.com/pier101) / ☺️팀원 : 장아라 - [깃허브](https://github.com/ararararararara) , 임철순 - [깃허브](https://github.com/POcodingWER), 박해민 - [깃허브](https://github.com/euphratesriver0216)
