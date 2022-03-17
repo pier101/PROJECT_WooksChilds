@@ -42,7 +42,7 @@ DBMS : `MySQL`
 사용 모듈(Client) : 
 
     "@ant-design/icons": "^4.7.0",
-    "@emotion/react": "^11.5.0",
+    "@emotion/react": "^11.5.0", 
     "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
